@@ -11,7 +11,8 @@ import NumberFormat from 'react-number-format';
 
 const mapStateToProps = state => {
     return {
-      totalIndia: state.totalData
+      totalIndia: state.totalData,
+      districtData: state.districtData
     }
 }
 
@@ -33,7 +34,8 @@ const RenderCases = ({data}) => {
         );
     }
     else if(cases != null) {
-        confirmed = parseInt(cases.confirmed);
+        //confirmed = parseInt(cases.confirmed);
+        //console.log(confirmed)
         return(
             <View style={{flex: 1, justifyContent: "center"}}>
                 <View style={{flex: 2, flexDirection: 'row', justifyContent: 'center'}} >
@@ -45,7 +47,7 @@ const RenderCases = ({data}) => {
                             {cases.confirmed}
                         </Text>
                         <Text style={styles.delta}>
-                            {'+' + cases.cChanges}
+                            {'+' + cases.cChanges + ' new cases'}
                         </Text>
                     </View>
                     <View style={{flex: 1, justifyContent: "center", borderRadius: 20, backgroundColor: '#1F498E', margin: 5, padding: 8}}>
@@ -56,7 +58,7 @@ const RenderCases = ({data}) => {
                             {cases.active}
                         </Text>
                         <Text style={styles.delta}>
-                            {'+' + cases.aChanges}
+                            {'+' + cases.aChanges + ' new cases'}
                         </Text>
                     </View>
                 </View>
@@ -69,7 +71,7 @@ const RenderCases = ({data}) => {
                             {cases.recovered}
                         </Text>
                         <Text style={styles.delta}>
-                            {'+' + cases.rChanges}
+                            {'+' + cases.rChanges + ' new cases'}
                         </Text>
                     </View>
                     <View style={{flex: 1, justifyContent: "center", borderRadius: 20, backgroundColor: '#6C757D', margin: 5, padding: 8}}>
@@ -80,7 +82,7 @@ const RenderCases = ({data}) => {
                             {cases.deaths}
                         </Text>
                         <Text style={styles.delta}>
-                            {'+' + cases.dChanges}
+                            {'+' + cases.dChanges + ' new cases'}
                         </Text>
                     </View>
                 </View>
@@ -100,43 +102,56 @@ class TotalData extends Component {
 
         return(
             <ScrollView style={{backgroundColor: '#FFF4F4', padding: 5}}>
-                <View style={styles.container}>
-                    <Animatable.View animation='zoomInDown' duration={4000} >
-                        <Animatable.View animation='pulse' iterationCount='infinite' duration={3000} delay={4000} >
-                            <Image style={styles.virus} source={ require('../covid.png')} />
-                        </Animatable.View>
-                    </Animatable.View>
-                    <Text style={styles.covid}>
-                        The COVID-19 pandemic in India is part of the worldwide pandemic of coronavirus
-                        disease 2019 (COVID-19) caused by severe acute respiratory syndrome coronavirus
-                        2 (SARS-CoV-2).
-                    </Text>
-                </View>
-                <View>
-                    <Text style={styles.mapHeading}>
-                        Cases Overview
-                    </Text>
+                <View >
+                
+                    <RenderCases data={this.props.totalIndia} />
+
                 </View>
                 <View style={styles.container}>
                     <Image style={styles.map} source={ require('../covidMap.png')} />
                 </View>
-                <View >
-                
-                <RenderCases data={this.props.totalIndia} />
 
-                </View>
-                <View style={styles.button, {flex: 2, flexDirection: 'row', marginBottom: 10}}>
+                <View style={styles.button, {flex: 2, flexDirection: 'row', marginBottom: 5}}>
+                    <View style={{ flex: 1 }} >
+                        <Card 
+                            containerStyle={{ justifyContent: 'center', backgroundColor: '#42D291', borderRadius: 100 }}
+                            >
+                            <Icon name='info' 
+                                type='font-awesome' 
+                                size={65}
+                                iconStyle={{ color: '#535050' }}
+                                onPress={() => navigate('About')}
+                                />
+                            <Text onPress={() => navigate('About')} style={{padding: 5, color: '#535050', fontWeight: 'bold', textAlign: 'center', fontSize: 17 }}>About COVID-19</Text>
+                        </Card>
+                    </View>
                     <View style={{ flex: 1}}>
                         <Card 
                             containerStyle={{ justifyContent: 'center', backgroundColor: '#F3DB55', borderRadius: 100 }}
                             >
                             <Icon name='home' 
                                 type='font-awesome' 
-                                size={90}
+                                size={65}
                                 iconStyle={{ color: '#535050' }}
                                 onPress={() => navigate('StateWiseData')}
                                 />
-                            <Text onPress={() => navigate('StateWiseData')} style={{padding: 5, color: '#535050', fontWeight: 'bold', textAlign: 'center', fontSize: 17 }}>Statewise</Text>
+                            <Text onPress={() => navigate('StateWiseData')} style={{padding: 5, color: '#535050', fontWeight: 'bold', textAlign: 'center', fontSize: 17 }}>Statewise Analysis</Text>
+                        </Card>
+                    </View>
+                    
+                </View>
+                <View style={styles.button, {flex: 2, flexDirection: 'row', marginBottom: 20}}>
+                    <View style={{ flex: 1 }} >
+                        <Card 
+                            containerStyle={{ justifyContent: 'center', backgroundColor: '#42D291', borderRadius: 100 }}
+                            >
+                            <Icon name='warning' 
+                                type='font-awesome' 
+                                size={78}
+                                iconStyle={{ color: '#535050' }}
+                                onPress={() => navigate('Symptoms')}
+                                />
+                            <Text onPress={() => navigate('Symptoms')} style={{padding: 5, color: '#535050', fontWeight: 'bold', textAlign: 'center', fontSize: 17 }}>Symptoms</Text>
                         </Card>
                     </View>
                     <View style={{ flex: 1 }} >
@@ -145,7 +160,7 @@ class TotalData extends Component {
                             >
                             <Icon name='shield' 
                                 type='font-awesome' 
-                                size={89}
+                                size={80}
                                 iconStyle={{ color: '#535050' }}
                                 onPress={() => navigate('Precautions')}
                                 />
@@ -153,6 +168,9 @@ class TotalData extends Component {
                         </Card>
                     </View>
                 </View>
+                <Text>
+                    {JSON.stringify(this.props.districtData.districtData)}
+                </Text>
                 
             </ScrollView>
         );

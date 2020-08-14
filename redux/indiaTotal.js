@@ -12,7 +12,7 @@ export const totalData = ( state = {
             case ActionTypes.TOTAL_LOADING:
                 return { ...state, isLoading: true, errMess: null, totalData: []};
 
-            case ActionTypes.ADD_TOTAL:
+            case ActionTypes.TOTAL_FAILED:
                 return { ...state, isLoading: false, errMess: action.payload, totalData: []};
             
             default :
