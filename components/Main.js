@@ -21,7 +21,7 @@ const Navigator = createStackNavigator({
     },
     StateWiseData: { screen: ({navigation}) => <StateWiseData navigation={navigation}/>,
         navigationOptions: {
-            title: 'StateWiseData',
+            title: 'Statewise Analysis',
         }
     },
     Precautions : { screen: ({navigation}) => <Precautions navigation={navigation}/>,
