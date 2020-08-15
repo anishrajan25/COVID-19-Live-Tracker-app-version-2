@@ -7,6 +7,8 @@ import { ConfigureStore } from "./redux/configureStore";
 
 const store= ConfigureStore();
 
+console.disableYellowBox = true;//rebuild to activate
+
 export default function App() {
   return (
     <Provider store={store}>

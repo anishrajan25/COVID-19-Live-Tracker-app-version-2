@@ -1,12 +1,8 @@
 import React, { Component } from "react";
-import Precautions from "./Precautions";
 import {Loading} from "./LoadingComponent";
 import { connect } from 'react-redux';
-import { StyleSheet, ScrollView, Text, View,Picker, Image, ActivityIndicator, Platform, Button } from "react-native";
-import { fetchTotalData } from "../redux/ActionCreators";
-import { Card, icon, Icon } from "react-native-elements";
+import { StyleSheet, ScrollView, Text, View,Picker} from "react-native";
 import * as Animatable from 'react-native-animatable';
-import NumberFormat from 'react-number-format';
 
 const mapStateToProps = state => {
     return {
@@ -23,44 +19,48 @@ const RenderCases = ({data}) => {
         //confirmed = parseInt(cases.confirmed);
         //console.log(confirmed)
         return(
-            <Animatable.View animation="fadeInUp" duration={2000}>
-                <View style={{flex: 2, flexDirection: 'row', justifyContent: 'center'}} >
-                    <View style={{flex: 1, justifyContent: "center", borderRadius: 20, backgroundColor: '#EA3636', margin: 5, padding: 8}}>
-                        <Text style={styles.statHeading}>
-                            Confirmed
-                        </Text>
-                         <Text style={styles.count}>
-                            {data.confirmed}
-                        </Text>
+            <View>
+                <Animatable.View animation="fadeInDown" duration={2000}>
+                    <View style={{flex: 2, flexDirection: 'row', justifyContent: 'center'}} >
+                        <View style={{flex: 1, justifyContent: "center", borderRadius: 20, backgroundColor: '#EA3636', margin: 5, padding: 8}}>
+                            <Text style={styles.statHeading}>
+                                Confirmed
+                            </Text>
+                            <Text style={styles.count}>
+                                {data.confirmed}
+                            </Text>
+                        </View>
+                        <View style={{flex: 1, justifyContent: "center", borderRadius: 20, backgroundColor: '#1F498E', margin: 5, padding: 8}}>
+                            <Text style={styles.statHeading}>
+                                Active
+                            </Text>
+                            <Text style={styles.count}>
+                                {data.active}
+                            </Text>
+                        </View>
                     </View>
-                    <View style={{flex: 1, justifyContent: "center", borderRadius: 20, backgroundColor: '#1F498E', margin: 5, padding: 8}}>
-                        <Text style={styles.statHeading}>
-                            Active
-                        </Text>
-                        <Text style={styles.count}>
-                            {data.active}
-                        </Text>
+                </Animatable.View>
+                <Animatable.View animation="fadeInUp" duration={2000}>
+                    <View style={{flex: 2, flexDirection: 'row', justifyContent: 'center'}}>
+                        <View style={{flex: 1, justifyContent: "center", borderRadius: 20, backgroundColor: '#33962C', margin: 5, padding: 8}}>
+                            <Text style={styles.statHeading}>
+                                Recovered
+                            </Text>
+                            <Text style={styles.count}>
+                                {data.recovered}
+                            </Text>
+                        </View>
+                        <View style={{flex: 1, justifyContent: "center", borderRadius: 20, backgroundColor: '#6C757D', margin: 5, padding: 8}}>
+                            <Text style={styles.statHeading}>
+                                Deaths
+                            </Text>
+                            <Text style={styles.count}>
+                                {data.deaths}
+                            </Text>
+                        </View>
                     </View>
-                </View>
-                <View style={{flex: 2, flexDirection: 'row', justifyContent: 'center'}}>
-                    <View style={{flex: 1, justifyContent: "center", borderRadius: 20, backgroundColor: '#33962C', margin: 5, padding: 8}}>
-                        <Text style={styles.statHeading}>
-                            Recovered
-                        </Text>
-                        <Text style={styles.count}>
-                            {data.recovered}
-                        </Text>
-                    </View>
-                    <View style={{flex: 1, justifyContent: "center", borderRadius: 20, backgroundColor: '#6C757D', margin: 5, padding: 8}}>
-                        <Text style={styles.statHeading}>
-                            Deaths
-                        </Text>
-                        <Text style={styles.count}>
-                            {data.deaths}
-                        </Text>
-                    </View>
-                </View>
-            </Animatable.View>
+                </Animatable.View>
+            </View>
         );
     }
     else{

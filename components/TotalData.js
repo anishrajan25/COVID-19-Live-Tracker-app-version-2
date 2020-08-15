@@ -1,18 +1,13 @@
 import React, { Component } from "react";
-import Precautions from "./Precautions";
-import StateWiseData from "./StateWiseData";
 import {Loading} from "./LoadingComponent";
 import { connect } from 'react-redux';
-import { StyleSheet, ScrollView, Text, View, Image, ActivityIndicator, Platform, Button } from "react-native";
-import { fetchTotalData } from "../redux/ActionCreators";
-import { Card, icon, Icon } from "react-native-elements";
+import { StyleSheet, ScrollView, Text, View, Image} from "react-native";
+import { Card, Icon } from "react-native-elements";
 import * as Animatable from 'react-native-animatable';
-import NumberFormat from 'react-number-format';
 
 const mapStateToProps = state => {
     return {
       totalIndia: state.totalData,
-      districtData: state.districtData
     }
 }
 
@@ -37,7 +32,7 @@ const RenderCases = ({data}) => {
         //confirmed = parseInt(cases.confirmed);
         //console.log(confirmed)
         return(
-            <View style={{flex: 1, justifyContent: "center"}}>
+            <Animatable.View animation='fadeIn' duration={2000}  style={{flex: 1, justifyContent: "center"}}>
                 <View style={{flex: 2, flexDirection: 'row', justifyContent: 'center'}} >
                     <View style={{flex: 1, justifyContent: "center", borderRadius: 20, backgroundColor: '#EA3636', margin: 5, padding: 8}}>
                         <Text style={styles.statHeading}>
@@ -86,7 +81,7 @@ const RenderCases = ({data}) => {
                         </Text>
                     </View>
                 </View>
-            </View>
+            </Animatable.View>
         );
     }
     else{
@@ -108,69 +103,57 @@ class TotalData extends Component {
 
                 </View>
                 <View style={styles.container}>
-                    <Image style={styles.map} source={ require('../covidMap.png')} />
+                    <Image style={styles.map} source={ require('./images/covidMap.png')} />
                 </View>
 
                 <View style={styles.button, {flex: 2, flexDirection: 'row', marginBottom: 5}}>
-                    <View style={{ flex: 1 }} >
-                        <Card 
-                            containerStyle={{ justifyContent: 'center', backgroundColor: '#42D291', borderRadius: 100 }}
-                            >
-                            <Icon name='info' 
-                                type='font-awesome' 
-                                size={65}
-                                iconStyle={{ color: '#535050' }}
-                                onPress={() => navigate('About')}
-                                />
-                            <Text onPress={() => navigate('About')} style={{padding: 5, color: '#535050', fontWeight: 'bold', textAlign: 'center', fontSize: 17 }}>About COVID-19</Text>
-                        </Card>
-                    </View>
-                    <View style={{ flex: 1}}>
-                        <Card 
-                            containerStyle={{ justifyContent: 'center', backgroundColor: '#F3DB55', borderRadius: 100 }}
-                            >
-                            <Icon name='home' 
-                                type='font-awesome' 
-                                size={65}
-                                iconStyle={{ color: '#535050' }}
-                                onPress={() => navigate('StateWiseData')}
-                                />
-                            <Text onPress={() => navigate('StateWiseData')} style={{padding: 5, color: '#535050', fontWeight: 'bold', textAlign: 'center', fontSize: 17 }}>Statewise Analysis</Text>
-                        </Card>
-                    </View>
-                    
+                    <Card 
+                        containerStyle={{ justifyContent: 'center', backgroundColor: '#3EB6FC', borderRadius: 50, flex:1 }}
+                        >
+                        <Icon name='info' 
+                            type='font-awesome' 
+                            size={65}
+                            iconStyle={{ color: '#535050' }}
+                            onPress={() => navigate('About')}
+                            />
+                        <Text onPress={() => navigate('About')} style={{padding: 5, color: '#535050', fontWeight: 'bold', textAlign: 'center', fontSize: 17 }}>About COVID-19</Text>
+                    </Card>
+                    <Card 
+                        containerStyle={{ justifyContent: 'center', backgroundColor: '#FF9B30', borderRadius: 50, flex: 1 }}
+                        >
+                        <Icon name='home' 
+                            type='font-awesome' 
+                            size={65}
+                            iconStyle={{ color: '#535050' }}
+                            onPress={() => navigate('StateWiseData')}
+                            />
+                        <Text onPress={() => navigate('StateWiseData')} style={{padding: 5, color: '#535050', fontWeight: 'bold', textAlign: 'center', fontSize: 17 }}>Statewise Analysis</Text>
+                    </Card>    
                 </View>
                 <View style={styles.button, {flex: 2, flexDirection: 'row', marginBottom: 20}}>
-                    <View style={{ flex: 1 }} >
-                        <Card 
-                            containerStyle={{ justifyContent: 'center', backgroundColor: '#42D291', borderRadius: 100 }}
-                            >
-                            <Icon name='warning' 
-                                type='font-awesome' 
-                                size={78}
-                                iconStyle={{ color: '#535050' }}
-                                onPress={() => navigate('Symptoms')}
-                                />
-                            <Text onPress={() => navigate('Symptoms')} style={{padding: 5, color: '#535050', fontWeight: 'bold', textAlign: 'center', fontSize: 17 }}>Symptoms</Text>
-                        </Card>
-                    </View>
-                    <View style={{ flex: 1 }} >
-                        <Card 
-                            containerStyle={{ justifyContent: 'center', backgroundColor: '#42D291', borderRadius: 100 }}
-                            >
-                            <Icon name='shield' 
-                                type='font-awesome' 
-                                size={80}
-                                iconStyle={{ color: '#535050' }}
-                                onPress={() => navigate('Precautions')}
-                                />
-                            <Text onPress={() => navigate('Precautions')} style={{padding: 5, color: '#535050', fontWeight: 'bold', textAlign: 'center', fontSize: 17 }}>Precautions</Text>
-                        </Card>
-                    </View>
+                    <Card 
+                        containerStyle={{ justifyContent: 'center', backgroundColor: '#F3DB55', borderRadius: 50 , flex: 1 }}
+                        >
+                        <Icon name='warning' 
+                            type='font-awesome' 
+                            size={78}
+                            iconStyle={{ color: '#535050' }}
+                            onPress={() => navigate('Symptoms')}
+                            />
+                        <Text onPress={() => navigate('Symptoms')} style={{padding: 5, color: '#535050', fontWeight: 'bold', textAlign: 'center', fontSize: 17 }}>Symptoms</Text>
+                    </Card>
+                    <Card 
+                        containerStyle={{ justifyContent: 'center', backgroundColor: '#42D291', borderRadius: 50, flex: 1  }}
+                        >
+                        <Icon name='shield' 
+                            type='font-awesome' 
+                            size={80}
+                            iconStyle={{ color: '#535050' }}
+                            onPress={() => navigate('Precautions')}
+                            />
+                        <Text onPress={() => navigate('Precautions')} style={{padding: 5, color: '#535050', fontWeight: 'bold', textAlign: 'center', fontSize: 17 }}>Precautions</Text>
+                    </Card>
                 </View>
-                <Text>
-                    {JSON.stringify(this.props.districtData.districtData)}
-                </Text>
                 
             </ScrollView>
         );
@@ -238,7 +221,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     count: {
-        margin: 5,
+        margin: 7,
         fontFamily: 'serif',
         color: 'white',
         justifyContent: 'center', 
@@ -253,6 +236,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 15,
         fontWeight: 'bold',
+        marginBottom: 4
     }
   });
 

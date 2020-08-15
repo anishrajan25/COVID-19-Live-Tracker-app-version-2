@@ -5,14 +5,14 @@ import TotalData from "./TotalData";
 import AboutCovid from './AboutCovid';
 import Symptoms from "./Symptoms";
 import { connect } from 'react-redux';
-import { StyleSheet, ScrollView, Text, View, Image, ActivityIndicator, Platform } from "react-native";
+import { View} from "react-native";
 import { fetchTotalData, fetchStateData, fetchDistrictData } from "../redux/ActionCreators";
 import { createStackNavigator } from "react-navigation";
 
 const Navigator = createStackNavigator({
     TotalData: { screen: ({navigation}) => <TotalData navigation={navigation}/>,
         navigationOptions: {
-            title: 'COVID-19 India Tracker',
+            title: 'COVID-19 Tracker | India',
             headerTitleStyle: {
                 marginLeft: 'auto',
                 marginRight: 'auto'

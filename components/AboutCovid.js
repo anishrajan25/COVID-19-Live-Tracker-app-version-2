@@ -1,11 +1,5 @@
 import React, { Component } from "react";
-import Precautions from "./Precautions";
-import StateWiseData from "./StateWiseData";
-import {Loading} from "./LoadingComponent";
-import { connect } from 'react-redux';
-import { StyleSheet, ScrollView, Text, View, Image, ActivityIndicator, Platform, Button, Linking } from "react-native";
-import { fetchTotalData } from "../redux/ActionCreators";
-import { Card, icon, Icon } from "react-native-elements";
+import { StyleSheet, ScrollView, Text, View, Image, Linking } from "react-native";
 import * as Animatable from 'react-native-animatable';
 
 export default class AboutCovid extends Component {
@@ -16,7 +10,7 @@ export default class AboutCovid extends Component {
                 <View style={styles.container} >
                     <Animatable.View animation='zoomInDown' duration={4000} >
                         <Animatable.View animation='pulse' iterationCount='infinite' duration={2000} >
-                            <Image style={styles.virus} source={ require('../covid.png')} />
+                            <Image style={styles.virus} source={ require('./images/covid.png')} />
                         </Animatable.View>
                     </Animatable.View>
                     <Text style={styles.covid}>
