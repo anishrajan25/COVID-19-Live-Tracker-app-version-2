@@ -17,7 +17,9 @@ const RenderCases = ({data}) => {
 
     if(data.isLoading) {
         return(
-            <Loading />
+            <ScrollView style={{backgroundColor: '#FFF8F8'}}>
+                <Loading />
+            </ScrollView>
         );
     }
 

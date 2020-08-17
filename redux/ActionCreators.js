@@ -1,7 +1,5 @@
 import * as ActionTypes from './ActionTypes';
 import { baseUrl } from '../shared/baseUrl';
-import { precautions } from './precautions';
-import { symptoms } from './symptoms';
 
 // TOTAL DATA FOR INDIA
 export const fetchTotalData = () => (dispatch) => {

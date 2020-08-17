@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, ScrollView, FlatList, Text, View, Image, Linking } from "react-native";
+import { StyleSheet, ScrollView, Text, View, Image, Linking } from "react-native";
 import { connect } from 'react-redux';
 import * as Animatable from 'react-native-animatable';
 import {Card} from 'react-native-shadow-cards';
@@ -17,7 +17,7 @@ class Symptoms extends Component {
 
         if(this.props.symptoms.isLoading) {
             return(
-                <ScrollView style={{backgroundColor: '#FFF4F4'}}>
+                <ScrollView style={{backgroundColor: '#FFF8F8'}}>
                     <Loading />
                 </ScrollView>
             );
@@ -25,7 +25,7 @@ class Symptoms extends Component {
 
         else if (this.props.symptoms.errMess) {
             return(
-                <ScrollView style={{backgroundColor: '#FFF4F4'}}>
+                <ScrollView style={{backgroundColor: '#FFF8F8'}}>
                     <Animatable.View style={styles.container} animation='fadeIn' duration={1000}>
                         <Card style={styles.card} >
                             <Text style={styles.errorText} >{this.props.symptoms.errMess}</Text>
@@ -36,7 +36,7 @@ class Symptoms extends Component {
         }
         else if(this.props.symptoms.symptoms !== null) {
             return(
-                <ScrollView style={{backgroundColor: '#FFF4F4'}}>
+                <ScrollView style={{backgroundColor: '#FFF8F8'}}>
                     {
                         this.props.symptoms.symptoms.map((item) => {
                             if(item.id%2===0) {
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
         marginRight: 'auto', 
         marginTop: 10, 
         marginBottom: 10 , 
-        elevation: 18,
+        elevation: 15,
     },
     linkCard: {
         marginLeft: 'auto', 
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
         padding: 5,
         marginTop: 10, 
         marginBottom: 20, 
-        elevation: 15,
+        elevation: 12,
 
     },
     linkInfo: {

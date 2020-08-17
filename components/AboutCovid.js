@@ -17,7 +17,7 @@ class AboutCovid extends Component {
 
         if(this.props.about.isLoading) {
             return(
-                <ScrollView>
+                <ScrollView  style={{backgroundColor: '#FFF8F8'}}>
                     <Loading />
                 </ScrollView>
             );
@@ -25,7 +25,7 @@ class AboutCovid extends Component {
 
         else if (this.props.about.errMess) {
             return(
-                <ScrollView>
+                <ScrollView  style={{backgroundColor: '#FFF8F8'}}>
                     <Animatable.View style={styles.container} animation='fadeIn' duration={1000}>
                         <Card style={styles.card} >
                             <Text style={styles.errorText} >{this.props.about.errMess}</Text>
@@ -36,7 +36,7 @@ class AboutCovid extends Component {
         }
         else if(this.props.about.about !== null) {
             return(
-                <ScrollView style={{backgroundColor: '#FFF8F8', padding: 5}}>
+                <ScrollView style={{backgroundColor: '#FFF9F9', padding: 5}}>
                     {
                         this.props.about.about.map((item) => {
                             if(item.info == null) {
@@ -153,7 +153,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginTop: 'auto',
         marginBottom: 'auto',
-        backgroundColor: 'transparent'
     }
 });
 

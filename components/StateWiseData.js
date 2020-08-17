@@ -182,200 +182,172 @@ class RenderStateCases extends Component {
 
     render() {
         
-    const data=this.props.data;
-    //var animate=this.props.animation;
-    //console.log(data);
-    
-    if(data != null) {
+        const data=this.props.data;
+        //var animate=this.props.animation;
+        //console.log(data);
         
-        var st ='';
-        if(this.props.areaId === "IN-LK")
-            st='LA';
-        else if(this.props.areaId === 'IN-DD' )
-            st = 'DN';
-        else if(this.props.areaId === 'IN-LD' )
-            st = '';
-        else
-            st = this.props.areaId.slice(3);
-        
-        //console.log("st val: ", st);
-        const districts = [];
-        //console.log("data arr: ", JSON.stringify(this.props.districts.districtData[st]));
-        if(st!== '') {
-            for( dist in (this.props.districts.districtData[st].districts)) {
-                if(dist !== 'Unknown' ){
-                    districts.push(dist);
+        if(data != null) {
+            
+            var st ='';
+            if(this.props.areaId === "IN-LK")
+                st='LA';
+            else if(this.props.areaId === 'IN-DD' )
+                st = 'DN';
+            else if(this.props.areaId === 'IN-LD' )
+                st = '';
+            else
+                st = this.props.areaId.slice(3);
+            
+            //console.log("st val: ", st);
+            const districts = [];
+            //console.log("data arr: ", JSON.stringify(this.props.districts.districtData[st]));
+            if(st!== '') {
+                for( dist in (this.props.districts.districtData[st].districts)) {
+                    if(dist !== 'Unknown' && dist!==data.state ){
+                        districts.push(dist);
+                    }
                 }
             }
-        }
-        
-        const updatedDistrict = this.state.district;
-        //console.log(districts);
-        //console.log(" showing dist data" ,this.props.districts.districtData[st].districts[this.state.district]);
-        //console.log(st, " " , updatedDistrict);
-        //console.log("outer log", JSON.stringify(this.props.districts.districtData[st].districtData[updatedDistrict]));
-        //confirmed = parseInt(cases.confirmed);
-        //console.log(confirmed)
-        return(
-            <ScrollView>
-            <View style={{paddingBottom: 30, flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
             
-            <Animatable.View animation={this.state.animation ? this.state.first : ""} onAnimationEnd={() => this.setState({animation: false, first: ""})} style={{flex: 1, flexDirection: 'column'}} duration={1500} >
-                    <Card style={ styles.card }>
-                        <Animatable.Text style={{
-        
-                                color: '#FF073A',
+            const updatedDistrict = this.state.district;
+            //console.log(districts);
+            //console.log(" showing dist data" ,this.props.districts.districtData[st].districts[this.state.district]);
+            //console.log(st, " " , updatedDistrict);
+            //console.log("outer log", JSON.stringify(this.props.districts.districtData[st].districtData[updatedDistrict]));
+            //confirmed = parseInt(cases.confirmed);
+            //console.log(confirmed)
+            return(
+                <ScrollView>
+                    <View style={{paddingBottom: 30, flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
+                    
+                    <Animatable.View animation={this.state.animation ? this.state.first : ""} onAnimationEnd={() => this.setState({animation: false, first: ""})} style={{flex: 1, flexDirection: 'column'}} duration={1500} >
+                            <Card style={ styles.card }>
+                                <Animatable.Text style={{
+                
+                                        color: '#FF073A',
+                                        justifyContent: 'center',
+                                        textAlign: 'center',
+                                        fontSize: 25,
+                                        fontWeight: 'bold',
+                                    }} animation={this.state.animation ? "fadeIn" : ""} duration={1000} onAnimationEnd={() => this.setState({animation: false})}>
+                                        Confirmed
+                                </Animatable.Text>
+                                <Animatable.Text style={{
+                                        margin: 5,
+                                        fontFamily: 'serif',
+                                        color: '#FF073A',
+                                        justifyContent: 'center', 
+                                        textAlign: 'center',
+                                        fontSize: 20,
+                                        fontWeight: 'bold',
+                                    }} animation={this.state.animation ? "fadeIn" : ""} duration={1000} >
+                                        {data.confirmed}
+                                </Animatable.Text>
+                            </Card>
+                            <Card style={ styles.card }>
+                                    <Animatable.Text style={{
+                
+                                            color: '#007BFF',
+                                            justifyContent: 'center',
+                                            textAlign: 'center',
+                                            fontSize: 25,
+                                            fontWeight: 'bold',
+                                        }} animation={this.state.animation ? "fadeIn" : ""} duration={1000} >
+                                        Active
+                                    </Animatable.Text>
+                                    <Animatable.Text style={{
+                                        margin: 5,
+                                        color: '#007BFF',
+                                        fontFamily: 'serif',
+                                        justifyContent: 'center', 
+                                        textAlign: 'center',
+                                        fontSize: 20,
+                                        fontWeight: 'bold',
+                                    }} animation={this.state.animation ? "fadeIn" : ""} duration={1000} >
+                                        {data.active}
+                                    </Animatable.Text>
+                            </Card>
+                            
+                    </Animatable.View>
+                    <Animatable.View animation={this.state.animation ? this.state.first : ""} style={{flex: 1, flexDirection: 'column'}} duration={1500} >
+                        <Card style={ styles.card }>
+                            <Animatable.Text style={{
+
+                                color: '#28A745',
                                 justifyContent: 'center',
                                 textAlign: 'center',
                                 fontSize: 25,
                                 fontWeight: 'bold',
-                            }} animation={this.state.animation ? "fadeIn" : ""} duration={1000} onAnimationEnd={() => this.setState({animation: false})}>
-                                Confirmed
-                        </Animatable.Text>
-                        <Animatable.Text style={{
-                                margin: 5,
-                                fontFamily: 'serif',
-                                color: '#FF073A',
-                                justifyContent: 'center', 
-                                textAlign: 'center',
-                                fontSize: 20,
-                                fontWeight: 'bold',
-                            }} animation={this.state.animation ? "fadeIn" : ""} duration={1000} >
-                                {data.confirmed}
-                        </Animatable.Text>
-                    </Card>
-                    <Card style={ styles.card }>
-                            <Animatable.Text style={{
-        
-                                    color: '#007BFF',
-                                    justifyContent: 'center',
-                                    textAlign: 'center',
-                                    fontSize: 25,
-                                    fontWeight: 'bold',
-                                }} animation={this.state.animation ? "fadeIn" : ""} duration={1000} >
-                                Active
-                            </Animatable.Text>
-                            <Animatable.Text style={{
-                                margin: 5,
-                                color: '#007BFF',
-                                fontFamily: 'serif',
-                                justifyContent: 'center', 
-                                textAlign: 'center',
-                                fontSize: 20,
-                                fontWeight: 'bold',
-                            }} animation={this.state.animation ? "fadeIn" : ""} duration={1000} >
-                                {data.active}
-                            </Animatable.Text>
-                    </Card>
-                    
-            </Animatable.View>
-            <Animatable.View animation={this.state.animation ? this.state.first : ""} style={{flex: 1, flexDirection: 'column'}} duration={1500} >
-                <Card style={ styles.card }>
-                    <Animatable.Text style={{
-
-                        color: '#28A745',
-                        justifyContent: 'center',
-                        textAlign: 'center',
-                        fontSize: 25,
-                        fontWeight: 'bold',
-                    }} animation={this.state.animation ? "fadeIn" : ""} duration={1000}>
-                        Recovered
-                    </Animatable.Text>
-                    <Animatable.Text style={{
-                                margin: 5,
-                                fontFamily: 'serif',
-                                color: '#28A745',
-                                justifyContent: 'center', 
-                                textAlign: 'center',
-                                fontSize: 20,
-                                fontWeight: 'bold',
                             }} animation={this.state.animation ? "fadeIn" : ""} duration={1000}>
-                        {data.recovered}
-                    </Animatable.Text>
-                </Card>
-                <Card style={ styles.card }>
-                             <Animatable.Text style={{
-        
-                                    color: '#6C757D',
-                                    justifyContent: 'center',
-                                    textAlign: 'center',
-                                    fontSize: 25,
-                                    fontWeight: 'bold',
-                                }} animation={this.state.animation ? "fadeIn" : ""} duration={1000}>
-                                Deceased
+                                Recovered
                             </Animatable.Text>
                             <Animatable.Text style={{
-                                margin: 5,
-                                fontFamily: 'serif',
-                                color: '#6C757D',
-                                justifyContent: 'center', 
-                                textAlign: 'center',
-                                fontSize: 20,
-                                fontWeight: 'bold',
-                            }} animation={this.state.animation ? "fadeIn" : ""} duration={1000}>
-                                {data.deaths}
+                                        margin: 5,
+                                        fontFamily: 'serif',
+                                        color: '#28A745',
+                                        justifyContent: 'center', 
+                                        textAlign: 'center',
+                                        fontSize: 20,
+                                        fontWeight: 'bold',
+                                    }} animation={this.state.animation ? "fadeIn" : ""} duration={1000}>
+                                {data.recovered}
                             </Animatable.Text>
-                    </Card>
-            </Animatable.View>
-            </View>
-            <View style={{flex: 1}}>
-                        
-            <Text style={styles.covid}>{this.state.district ? this.state.district : 'Select District'}</Text>
-            <Picker
-                    style={styles.formItem}
-                    selectedValue={this.state.district}
-                    onValueChange={(itemValue, itemIndex) => {this.setState({district: itemValue})}}>
-                    <Picker.Item label={'Select District'} value={''}/>
-                    {
-                        districts.map((dist) => {
-                            return(
-                                <Picker.Item label={dist} value={dist} />
-                            );
-                        })
-                    }
-                </Picker>
-                <View>
+                        </Card>
+                        <Card style={ styles.card }>
+                                    <Animatable.Text style={{
                 
-                    <RenderDistrictCases distData={st ? this.props.districts.districtData[st].districts[this.state.district] : null} />
+                                            color: '#6C757D',
+                                            justifyContent: 'center',
+                                            textAlign: 'center',
+                                            fontSize: 25,
+                                            fontWeight: 'bold',
+                                        }} animation={this.state.animation ? "fadeIn" : ""} duration={1000}>
+                                        Deceased
+                                    </Animatable.Text>
+                                    <Animatable.Text style={{
+                                        margin: 5,
+                                        fontFamily: 'serif',
+                                        color: '#6C757D',
+                                        justifyContent: 'center', 
+                                        textAlign: 'center',
+                                        fontSize: 20,
+                                        fontWeight: 'bold',
+                                    }} animation={this.state.animation ? "fadeIn" : ""} duration={1000}>
+                                        {data.deaths}
+                                    </Animatable.Text>
+                            </Card>
+                    </Animatable.View>
+                    </View>
+                    <Animatable.View animation='fadeIn' duration={1000} delay={500} style={{flex: 1}}>
+                                
+                        <Text style={styles.covid}>{this.state.district ? this.state.district : 'Select District'}</Text>
+                        <Picker
+                            style={styles.formItem}
+                            selectedValue={this.state.district}
+                            onValueChange={(itemValue, itemIndex) => {this.setState({district: itemValue})}}>
+                            <Picker.Item label={'Select District'} value={''}/>
+                            {
+                                districts.map((dist) => {
+                                    return(
+                                        <Picker.Item label={dist} value={dist} />
+                                    );
+                                })
+                            }
+                        </Picker>
+                        <View>
+                            <RenderDistrictCases distData={st ? this.props.districts.districtData[st].districts[this.state.district] : null} />
+                        </View>
+                    </Animatable.View>
 
-                </View>
+                </ScrollView>
 
-                   
-</View>
-
-            </ScrollView>
-
-        );
-    }
-    else{
-        return(<View></View>)
+            );
+        }
+        else{
+            return(<View></View>)
+        }
     }
 }
-}
-
-
-
-/*
-
-
-
-
-                 <Text style={styles.covid}>{st ? st : 'Select District'}</Text>
-                <Picker
-                    style={styles.formItem}
-                    selectedValue={st}
-                    onValueChange={(itemValue, itemIndex) => {this.setState({district: itemValue ? this.props.districtData.filter((district) => itemValue === district)[0] : '', areaId: itemValue }) }}>
-                    <Picker.Item label={'Select District'} value={''}/>
-                    {
-                        this.props.stateData.stateData.map((area) => {
-                            return(
-                                <Picker.Item label={area.state} value={area.id} />
-                            );
-                        })
-                    }
-                </Picker>
-                
-*/
 
 
 
@@ -392,47 +364,50 @@ class StateWiseData extends Component {
     }
 
     render() {
-        
-        const {navigate} = this.props.navigation;
 
         if(this.props.stateData.isLoading) {
             return(
-                <Loading />
+                <ScrollView style={{backgroundColor: '#FFF8F8'}}>
+                    <Loading />
+                </ScrollView>
             );
         }
     
         else if (this.props.stateData.errMess) {
             return(
-                <View>
-                    <Text>{props.errMess}</Text>
-                </View>
+                <ScrollView style={{backgroundColor: '#FFF8F8'}}>
+                    <Animatable.View style={styles.container} animation='fadeIn' duration={1000}>
+                        <Card style={styles.card} >
+                            <Text style={styles.errorText} >{this.props.stateData.errMess}</Text>
+                        </Card>
+                    </Animatable.View>
+                </ScrollView>
             );
         }
-        else if(this.props.stateData.stateData)
-        return(
-            
-            <ScrollView style={{backgroundColor: 'white'}}>
-                <Text style={styles.covid}>{this.state.area ? this.state.area.state : 'Select State/ U.T.'}</Text>
-                <Picker
-                    style={styles.formItem}
-                    selectedValue={this.state.areaId}
-                    onValueChange={(itemValue, itemIndex) => {this.setState({area: itemValue ? this.props.stateData.stateData.filter((area) => itemValue === area.id)[0] : '', areaId: itemValue }) }}>
-                    <Picker.Item label={'Select State / U.T.'} value={''}/>
-                    {
-                        this.props.stateData.stateData.map((area) => {
-                            return(
-                                <Picker.Item label={area.state} value={area.id} />
-                            );
-                        })
-                    }
-                </Picker>
-                <View>
-                
-                    <RenderStateCases areaId={this.state.areaId} districts={this.props.districtData} data={this.state.area} />
-
-                </View>
-            </ScrollView>
-        );
+        else if(this.props.stateData.stateData) {
+            return(
+                <ScrollView style={{backgroundColor: 'white'}}>
+                    <Text style={styles.covid}>{this.state.area ? this.state.area.state : 'Select State/ U.T.'}</Text>
+                    <Picker
+                        style={styles.formItem}
+                        selectedValue={this.state.areaId}
+                        onValueChange={(itemValue, itemIndex) => {this.setState({area: itemValue ? this.props.stateData.stateData.filter((area) => itemValue === area.id)[0] : '', areaId: itemValue }) }}>
+                        <Picker.Item label={'Select State / U.T.'} value={''}/>
+                        {
+                            this.props.stateData.stateData.map((area) => {
+                                return(
+                                    <Picker.Item label={area.state} value={area.id} />
+                                );
+                            })
+                        }
+                    </Picker>
+                    <View>
+                        <RenderStateCases areaId={this.state.areaId} districts={this.props.districtData} data={this.state.area} />
+                    </View>
+                </ScrollView>
+            );
+        }
+        
     }
 }
 
@@ -455,7 +430,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#F36161',
         margin: 40,
         fontWeight: 'bold',
-        borderRadius: 20,
+        borderRadius: 50,
         fontSize: 17,
         padding: 20,
         fontFamily: 'serif',
