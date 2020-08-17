@@ -72,7 +72,7 @@ class Precautions extends Component {
                                 />
                                 <Text style={styles.info}
                                     onPress={() => Linking.openURL('https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public')}>
-                                    Learn More on who.int
+                                    Learn more on who.int
                                 </Text>
                             </View>
                         </Card>

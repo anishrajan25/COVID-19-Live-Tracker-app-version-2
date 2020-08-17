@@ -5,6 +5,7 @@ import { totalData } from './indiaTotal';
 import { stateData } from "./stateData";
 import { symptoms } from "./symptoms";
 import { districtData } from "./districtData";
+import { about } from "./about";
 import { precautions } from "./precautions";
 import { persistStore, persistCombineReducers } from 'redux-persist';
 
@@ -15,7 +16,8 @@ export const ConfigureStore = () => {
             stateData,
             districtData,
             precautions,
-            symptoms
+            symptoms,
+            about
         }),
         applyMiddleware(thunk, logger)
     );

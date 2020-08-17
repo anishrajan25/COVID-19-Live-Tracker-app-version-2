@@ -13,46 +13,11 @@ const mapStateToProps = state => {
 
 class Symptoms extends Component {
 
-    renderSymptomItem = ({item, index}) => {
-        if(index%2===0) {
-            return(
-                <Animatable.View animation='slideInRight' duration={1000}>
-                    <Card style={ styles.card }>
-                        <View style={{flex: 1, flexDirection: 'row'}}>
-                            <View style={{ flex: 1 }}>
-                                <Image source={{ uri: item.image }} style={ styles.icon } />
-                            </View>
-                            <View style={{flex: 2, justifyContent: 'center'}}>
-                                <Text style={{ fontWeight: 'bold' , textAlign: "center", fontSize: 17 , marginBottom: 3}}>{item.name}</Text>
-                            </View>
-                        </View>
-                    </Card>
-                </Animatable.View>
-            );
-        }
-        else {
-            return(
-                <Animatable.View animation='slideInLeft' duration={1000}>
-                    <Card style={ styles.card }>
-                        <View style={{flex: 1, flexDirection: 'row'}}>
-                            <View style={{flex: 2, justifyContent: 'center'}}>
-                                <Text style={{ fontWeight: 'bold' , textAlign: "center", fontSize: 17 , marginBottom: 3}}>{item.name}</Text>
-                            </View>
-                            <View style={{ flex: 1 }}>
-                                <Image source={{ uri: item.image }} style={ styles.icon } />
-                            </View>
-                        </View>
-                    </Card>
-                </Animatable.View>
-            );
-        }
-    }
-
     render() {
 
         if(this.props.symptoms.isLoading) {
             return(
-                <ScrollView>
+                <ScrollView style={{backgroundColor: '#FFF4F4'}}>
                     <Loading />
                 </ScrollView>
             );
@@ -60,7 +25,7 @@ class Symptoms extends Component {
 
         else if (this.props.symptoms.errMess) {
             return(
-                <ScrollView>
+                <ScrollView style={{backgroundColor: '#FFF4F4'}}>
                     <Animatable.View style={styles.container} animation='fadeIn' duration={1000}>
                         <Card style={styles.card} >
                             <Text style={styles.errorText} >{this.props.symptoms.errMess}</Text>
@@ -71,32 +36,59 @@ class Symptoms extends Component {
         }
         else if(this.props.symptoms.symptoms !== null) {
             return(
-                <ScrollView>
-                    <Animatable.View animation='slideInUp' duration={1000}>
-                        <FlatList
-                            style={{backgroundColor: 'white' }}
-                            data={this.props.symptoms.symptoms}
-                            renderItem={this.renderSymptomItem}
-                            keyExtractor={item => item.id.toString()}
-                        />
-                        <Card style={ { margin: 10 }, styles.card}>
-                            <View style={{flex: 1, flexDirection: 'row'}}>
-                                <Icon
-                                    style={{flex: 1}}
-                                    name= {"globe"}
-                                    type="font-awesome"
-                                    color="#1668BD"
-                                    raised
-                                    onPress={() => Linking.openURL('https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public')}
-                                />
-                                <Text style={styles.info}
-                                    onPress={() => Linking.openURL('https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public')}>
-                                    Learn More on who.int
-                                </Text>
-                            </View>
-                        </Card>
-                        
-                    </Animatable.View>
+                <ScrollView style={{backgroundColor: '#FFF4F4'}}>
+                    {
+                        this.props.symptoms.symptoms.map((item) => {
+                            if(item.id%2===0) {
+                                return(
+                                    <Animatable.View animation='slideInRight' duration={1000}>
+                                        <Card style={ styles.card }>
+                                            <View style={{flex: 1, flexDirection: 'row'}}>
+                                                <View style={{ flex: 1 }}>
+                                                    <Image source={{ uri: item.image }} style={ styles.icon } />
+                                                </View>
+                                                <View style={{flex: 2, justifyContent: 'center'}}>
+                                                    <Text style={{ fontWeight: 'bold' , textAlign: "center", fontSize: 17 , marginBottom: 3}}>{item.name}</Text>
+                                                </View>
+                                            </View>
+                                        </Card>
+                                    </Animatable.View>
+                                );
+                            }
+                            else {
+                                return(
+                                    <Animatable.View animation='slideInLeft' duration={1000}>
+                                        <Card style={ styles.card }>
+                                            <View style={{flex: 1, flexDirection: 'row'}}>
+                                                <View style={{flex: 2, justifyContent: 'center'}}>
+                                                    <Text style={{ fontWeight: 'bold' , textAlign: "center", fontSize: 17 , marginBottom: 3}}>{item.name}</Text>
+                                                </View>
+                                                <View style={{ flex: 1 }}>
+                                                    <Image source={{ uri: item.image }} style={ styles.icon } />
+                                                </View>
+                                            </View>
+                                        </Card>
+                                    </Animatable.View>
+                                );
+                            }
+                        })
+                    }
+                    <Card style={styles.linkCard}>
+                        <View style={{flex: 1, flexDirection: 'row'}}>
+                            <Icon
+                                style={{flex: 1}}
+                                name= {"globe"}
+                                type="font-awesome"
+                                color="#1668BD"
+                                raised
+                                onPress={() => Linking.openURL('https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public')}
+                            />
+                            <Text style={styles.linkInfo}
+                                onPress={() => Linking.openURL('https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public')}>
+                                Learn more on who.int
+                            </Text>
+                        </View>
+                    </Card>
                 </ScrollView>
             );
         }
@@ -127,161 +119,33 @@ const styles = StyleSheet.create({
         marginRight: 'auto',
     },
     card: {
-        padding: 10, 
+        padding: 15, 
         marginLeft: 'auto', 
         marginRight: 'auto', 
         marginTop: 10, 
-        marginBottom: 5 , 
-        elevation: 50,
+        marginBottom: 10 , 
+        elevation: 18,
     },
-    info: {
+    linkCard: {
+        marginLeft: 'auto', 
+        marginRight: 'auto', 
+        padding: 5,
+        marginTop: 10, 
+        marginBottom: 20, 
+        elevation: 15,
+
+    },
+    linkInfo: {
         flex: 2,
         fontWeight: 'bold',
         fontSize: 17,
-        lineHeight: 20,
         color: '#1668BD',
         fontFamily: 'serif',
         textAlign: 'center',
         marginTop: 'auto',
         marginBottom: 'auto',
+        backgroundColor: 'transparent'
     }
   });
 
 export default connect(mapStateToProps)(Symptoms);
-
-/*render() {
-        return(
-            <ScrollView style={styles.container}>
-                <Animatable.View animation='slideInRight' duration={1000}>
-                    <Card style={ styles.card }>
-                        <View style={{flex: 1, flexDirection: 'row'}}>
-                            <View style={{ flex: 1 }}>
-                                <Image source={ require('./images/fever.png')} style={ styles.icon } />
-                            </View>
-                            <View style={{flex: 2, justifyContent: 'center'}}>
-                                <Text style={{ fontWeight: 'bold' , textAlign: "center", fontSize: 17 , marginBottom: 3}}>Fever or Chills</Text>
-                            </View>
-                        </View>
-                    </Card>
-                    </Animatable.View>
-                    <Animatable.View animation='slideInLeft' duration={1000}>
-                    <Card style={ styles.card }>
-                        <View style={{flex: 1, flexDirection: 'row'}}>
-                            <View style={{flex: 2, justifyContent: 'center' }}>
-                                <Text style={{ fontWeight: 'bold' , textAlign: "center", fontSize: 17, marginBottom: 3}}>Dry Cough</Text>
-                            </View>
-                            <View style={{ flex: 1 }}>
-                                <Image source={ require('./images/cough.png')} style={ styles.icon } />
-                            </View>
-                        </View>
-                    </Card>
-                    </Animatable.View>
-                    
-                    <Animatable.View animation='slideInRight' duration={1000}>
-                    <Card style={ styles.card }>
-                        <View style={{flex: 1, flexDirection: 'row'}}>
-                            <View style={{ flex: 1 }}>
-                                <Image source={ require('./images/chest.png')} style={ styles.icon } />
-                            </View>
-                            <View style={{flex: 2, justifyContent: 'center'}}>
-                                <Text style={{ fontWeight: 'bold' , textAlign: "center", fontSize: 17, marginBottom: 3}}>Chest Pain or Pressure</Text>
-
-                            </View>
-                        </View>
-                    </Card>
-                </Animatable.View>
-                <Animatable.View animation='slideInLeft' duration={1000}>
-                    <Card style={ styles.card }>
-                        <View style={{flex: 1, flexDirection: 'row'}}>                            
-                            <View style={{flex: 2, justifyContent: 'center'}}>
-                                <Text style={{ fontWeight: 'bold' , textAlign: "center", fontSize: 17, marginBottom: 3}}>Loss of Taste and Smell</Text>
-                            </View>
-                            <View style={{ flex: 1 }}>
-                                <Image source={ require('./images/smell.png')} style={ styles.icon } />
-                            </View>
-                        </View>
-                    </Card>
-                </Animatable.View>
-                <Animatable.View animation='slideInRight' duration={1000}>
-                    <Card style={ styles.card }>
-                        <View style={{flex: 1, flexDirection: 'row'}}>
-                            <View style={{ flex: 1 }}>
-                                <Image source={ require('./images/throat.png')} style={ styles.icon } />
-                            </View>
-                            <View style={{flex: 2, justifyContent: 'center'}}>
-                                <Text style={{ fontWeight: 'bold' , textAlign: "center", fontSize: 17, marginBottom: 3}}>Sore Throat</Text>
-
-                            </View>
-                        </View>
-                    </Card>
-                </Animatable.View>
-                    <Animatable.View animation='slideInLeft' duration={1000}>
-                    <Card style={ styles.card }>
-                        <View style={{flex: 1, flexDirection: 'row'}}>
-                            <View style={{flex: 2, justifyContent: 'center'}}>
-                                <Text style={{ fontWeight: 'bold' , textAlign: "center", fontSize: 17, marginBottom: 3}}>Shortness of Breath/ Difficulty in Breathing</Text>
-                             </View>
-                             <View style={{ flex: 1 }}>
-                                <Image source={ require('./images/breath.png')} style={ styles.icon } />
-                            </View>
-                        </View>
-                    </Card>
-                    </Animatable.View>
-                    <Animatable.View animation='slideInRight' duration={1000}>
-                    <Card style={ styles.card }>
-                        <View style={{flex: 1, flexDirection: 'row'}}>
-                            <View style={{ flex: 1 }}>
-                                <Image source={ require('./images/headache.png')} style={ styles.icon } />
-                            </View>
-                            <View style={{flex: 2, justifyContent: 'center'}}>
-                                <Text style={{ fontWeight: 'bold' , textAlign: "center", fontSize: 17, marginBottom: 3}}>Headache or Nausea</Text>
-
-                            </View>
-                        </View>
-                    </Card>
-                </Animatable.View>
-                    <Animatable.View animation='slideInLeft' duration={1000}>
-                    <Card style={ styles.card }>
-                        <View style={{flex: 1, flexDirection: 'row'}}>
-                            <View style={{flex: 2, justifyContent: 'center'}}>
-                                <Text style={{ fontWeight: 'bold' , textAlign: "center", fontSize: 17, marginBottom: 3}}>Muscle Pain or Bodyaches</Text>
-                            </View>
-                            <View style={{ flex: 1 }}>
-                                <Image source={ require('./images/bodyache.png')} style={ styles.icon } />
-                            </View>
-                        </View>
-                    </Card>
-                    </Animatable.View>
-                    
-                <Animatable.View animation='slideInRight' duration={1000}>
-                    <Card style={ styles.card }>
-                        <View style={{flex: 1, flexDirection: 'row'}}>
-                            <View style={{ flex: 1 }}>
-                                <Image source={ require('./images/fatigue.png')} style={ styles.icon } />
-                            </View>
-                            <View style={{flex: 2, justifyContent: 'center'}}>
-                                <Text style={{ fontWeight: 'bold' , textAlign: "center", fontSize: 17, marginBottom: 3}}>Fatigue or Tiredness</Text>
-                            </View>
-                        </View>
-                    </Card>
-                    </Animatable.View>
-                    <Animatable.View animation='slideInLeft' duration={1000} style={{marginBottom: 10}} >
-                    <Card style={ styles.card }>
-                        <View style={{flex: 1, flexDirection: 'row'}}>
-                            
-                            <View style={{flex: 2, justifyContent: 'center'}}>
-                                <Text style={{ fontWeight: 'bold' , textAlign: "center", fontSize: 17, marginBottom: 3}}>Diarrhea or Vomiting</Text>
-
-                            </View>
-                            <View style={{ flex: 1 }}>
-                                <Image source={ require('./images/diarrhea.png')} style={ styles.icon } />
-                            </View>
-                        </View>
-                    </Card>
-                </Animatable.View>
-                
-            </ScrollView>
-            
-        );
-    }
-    */

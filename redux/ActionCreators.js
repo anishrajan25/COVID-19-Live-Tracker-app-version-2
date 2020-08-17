@@ -200,3 +200,42 @@ export const addSymptoms = (symptoms) => ({
     type: ActionTypes.ADD_SYMPTOMS,
     payload: symptoms
 });
+
+
+// ABOUT
+export const fetchAbout = () => (dispatch) => {
+
+    dispatch(aboutLoading());
+
+    return fetch(baseUrl + 'about')
+    .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error('Error ' + response.status + ': ' + response.statusText);
+          error.response = response;
+          throw error;
+        }
+      },
+      error => {
+            var errmess = new Error(error.message);
+            throw errmess;
+      })
+    .then(response => response.json())
+    .then(about => dispatch(addAbout(about)))
+    .catch(error => dispatch(aboutFailed(error.message)));
+};
+
+export const aboutLoading = () => ({
+    type: ActionTypes.ABOUT_LOADING
+});
+
+export const aboutFailed = (errmess) => ({
+    type: ActionTypes.ABOUT_FAILED,
+    payload: errmess
+});
+
+export const addAbout = (about) => ({
+    type: ActionTypes.ADD_ABOUT,
+    payload: about
+});

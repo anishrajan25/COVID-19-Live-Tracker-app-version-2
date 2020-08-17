@@ -1,32 +1,107 @@
 import React, { Component } from "react";
 import { StyleSheet, ScrollView, Text, View, Image, Linking } from "react-native";
 import * as Animatable from 'react-native-animatable';
+import { Icon } from "react-native-elements";
+import { connect } from 'react-redux';
+import {Card} from 'react-native-shadow-cards';
 
-export default class AboutCovid extends Component {
+const mapStateToProps = state => {
+    return {
+      about: state.about
+    }
+}
+
+class AboutCovid extends Component {
 
     render() {
-        return(
-            <ScrollView style={{backgroundColor: '#FFF4F4', padding: 5}}>
-                <View style={styles.container} >
-                    <Animatable.View animation='zoomInDown' duration={4000} >
-                        <Animatable.View animation='pulse' iterationCount='infinite' duration={2000} >
-                            <Image style={styles.virus} source={ require('./images/covid.png')} />
-                        </Animatable.View>
+
+        if(this.props.about.isLoading) {
+            return(
+                <ScrollView>
+                    <Loading />
+                </ScrollView>
+            );
+        }
+
+        else if (this.props.about.errMess) {
+            return(
+                <ScrollView>
+                    <Animatable.View style={styles.container} animation='fadeIn' duration={1000}>
+                        <Card style={styles.card} >
+                            <Text style={styles.errorText} >{this.props.about.errMess}</Text>
+                        </Card>
                     </Animatable.View>
-                    <Text style={styles.covid}>
-                        The COVID-19 pandemic in India is part of the worldwide pandemic of coronavirus
-                        disease 2019 (COVID-19) caused by severe acute respiratory syndrome coronavirus
-                        2 (SARS-CoV-2). It is an infectious disease caused by a newly discovered coronavirus.
-                        The COVID-19 virus spresads primarily through droplets of saliva or discharge from nose
-                        when an infected person coughs or sneezes.
-                    </Text>
-                    <Text style={styles.info}
-                        onPress={() => Linking.openURL('https://en.wikipedia.org/wiki/Coronavirus')}>
-                        More information on Coronavirus: Wikipedia
-                    </Text>
-                </View>
-            </ScrollView>
-        );
+                </ScrollView>
+            );
+        }
+        else if(this.props.about.about !== null) {
+            return(
+                <ScrollView style={{backgroundColor: '#FFF8F8', padding: 5}}>
+                    {
+                        this.props.about.about.map((item) => {
+                            if(item.info == null) {
+                                return(
+                                    <Animatable.View animation='zoomInDown' duration={4000} >
+                                        <Animatable.View animation='pulse' iterationCount='infinite' duration={2000} >
+                                            <Image style={styles.virus} source={{uri: item.image }} />
+                                        </Animatable.View>
+                                    </Animatable.View>
+                                );
+                            }
+                            else {
+                                return(
+                                    <Animatable.View>
+                                        <Text style={styles.heading}>{item.heading}</Text>
+                                        <Text style={styles.info}>{item.info}</Text>
+                                    </Animatable.View>
+                                ); 
+                            }
+                        })
+                    }
+                    <Card style={styles.linkCard}>
+                        <View style={{flex: 1, flexDirection: 'row'}}>
+                            <Icon
+                                style={{flex: 1, 
+                                    backgroundColor: 'transparent'}}
+                                name= {"globe"}
+                                type="font-awesome"
+                                color="#1668BD"
+                                raised
+                                reverse
+                                onPress={() => Linking.openURL('https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public')}
+                            />
+                            <Text style={styles.linkInfo}
+                                onPress={() => Linking.openURL('https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public')}>
+                                Learn more on who.int
+                            </Text>
+                        </View>
+                    </Card>
+                    <Card style={styles.linkCard}>
+                        <View style={{flex: 1, flexDirection: 'row'}}>
+                            <Icon
+                                style={{flex: 1, 
+                                    backgroundColor: 'transparent'}}
+                                name= {"link"}
+                                type="font-awesome"
+                                color="#1668BD"
+                                raised
+                                reverse
+                                onPress={() => Linking.openURL('https://en.wikipedia.org/wiki/Coronavirus')}
+                            />
+                            <Text style={styles.linkInfo}
+                                onPress={() => Linking.openURL('https://en.wikipedia.org/wiki/Coronavirus')}>
+                                Learn more about Coronavirus on wikipedia.com
+                            </Text>
+                        </View>
+                    </Card>
+                </ScrollView>
+            );
+        }
+        else {
+            return(
+                <View></View>
+            );
+        }   
     }
 }
 
@@ -35,35 +110,51 @@ const styles = StyleSheet.create({
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: '#FFF4F4'
     },
     virus: {
         height: 250,
         width: 250,
-        marginTop: 20
+        marginTop: 20,
+        marginLeft: 'auto',
+        marginRight: 'auto'
     },
-    covid: {
-        
-        margin: 10,
-        borderRadius: 20,
-        fontSize: 18,
-        padding: 20,
-        fontFamily: 'serif',
-        color: 'black',
-        lineHeight: 30,
-        justifyContent: 'center',
+    heading: {
+        fontWeight: 'bold',
+        textAlign: 'center',
+        marginTop: 15,
+        fontSize: 25,
     },
     info: {
-        backgroundColor: '#F36161',
-        margin: 20,
-        fontWeight: 'bold',
         borderRadius: 20,
         fontSize: 17,
         padding: 20,
-        lineHeight: 20,
+        paddingTop: 15,
+        marginBottom: 30,
         fontFamily: 'serif',
-        color: 'white',
+        color: 'black',
+        lineHeight: 25,
         justifyContent: 'center',
-        textAlign: 'center'
+    },
+    linkCard: {
+        marginLeft: 'auto', 
+        marginRight: 'auto', 
+        padding: 5,
+        marginTop: 10, 
+        marginBottom: 20, 
+        elevation: 18,
+
+    },
+    linkInfo: {
+        flex: 2,
+        fontWeight: 'bold',
+        fontSize: 17,
+        color: '#1668BD',
+        fontFamily: 'serif',
+        textAlign: 'center',
+        marginTop: 'auto',
+        marginBottom: 'auto',
+        backgroundColor: 'transparent'
     }
 });
+
+export default connect(mapStateToProps)(AboutCovid);
