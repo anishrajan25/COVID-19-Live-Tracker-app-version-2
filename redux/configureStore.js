@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import { totalData } from './indiaTotal';
 import { stateData } from "./stateData";
+import { symptoms } from "./symptoms";
 import { districtData } from "./districtData";
 import { precautions } from "./precautions";
 import { persistStore, persistCombineReducers } from 'redux-persist';
@@ -13,7 +14,8 @@ export const ConfigureStore = () => {
             totalData,
             stateData,
             districtData,
-            precautions
+            precautions,
+            symptoms
         }),
         applyMiddleware(thunk, logger)
     );
