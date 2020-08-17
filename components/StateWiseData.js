@@ -225,10 +225,12 @@ class RenderStateCases extends Component {
                                 <Animatable.Text style={{
                 
                                         color: '#FF073A',
+                                        fontFamily: 'serif',
                                         justifyContent: 'center',
                                         textAlign: 'center',
-                                        fontSize: 25,
+                                        fontSize: 22,
                                         fontWeight: 'bold',
+                                        letterSpacing: 0.2
                                     }} animation={this.state.animation ? "fadeIn" : ""} duration={1000} onAnimationEnd={() => this.setState({animation: false})}>
                                         Confirmed
                                 </Animatable.Text>
@@ -248,10 +250,12 @@ class RenderStateCases extends Component {
                                     <Animatable.Text style={{
                 
                                             color: '#007BFF',
+                                            fontFamily: 'serif',
                                             justifyContent: 'center',
                                             textAlign: 'center',
-                                            fontSize: 25,
+                                            fontSize: 22,
                                             fontWeight: 'bold',
+                                            letterSpacing: 0.2,
                                         }} animation={this.state.animation ? "fadeIn" : ""} duration={1000} >
                                         Active
                                     </Animatable.Text>
@@ -274,10 +278,12 @@ class RenderStateCases extends Component {
                             <Animatable.Text style={{
 
                                 color: '#28A745',
+                                fontFamily: 'serif',
                                 justifyContent: 'center',
                                 textAlign: 'center',
-                                fontSize: 25,
+                                fontSize: 22,
                                 fontWeight: 'bold',
+                                letterSpacing: 0.2
                             }} animation={this.state.animation ? "fadeIn" : ""} duration={1000}>
                                 Recovered
                             </Animatable.Text>
@@ -294,27 +300,29 @@ class RenderStateCases extends Component {
                             </Animatable.Text>
                         </Card>
                         <Card style={ styles.card }>
-                                    <Animatable.Text style={{
-                
-                                            color: '#6C757D',
-                                            justifyContent: 'center',
-                                            textAlign: 'center',
-                                            fontSize: 25,
-                                            fontWeight: 'bold',
-                                        }} animation={this.state.animation ? "fadeIn" : ""} duration={1000}>
-                                        Deceased
-                                    </Animatable.Text>
-                                    <Animatable.Text style={{
-                                        margin: 5,
-                                        fontFamily: 'serif',
+                                <Animatable.Text style={{
+            
                                         color: '#6C757D',
-                                        justifyContent: 'center', 
+                                        fontFamily: 'serif',
+                                        justifyContent: 'center',
                                         textAlign: 'center',
-                                        fontSize: 20,
+                                        fontSize: 22,
                                         fontWeight: 'bold',
+                                        letterSpacing: 0.2
                                     }} animation={this.state.animation ? "fadeIn" : ""} duration={1000}>
-                                        {data.deaths}
-                                    </Animatable.Text>
+                                    Deceased
+                                </Animatable.Text>
+                                <Animatable.Text style={{
+                                    margin: 5,
+                                    fontFamily: 'serif',
+                                    color: '#6C757D',
+                                    justifyContent: 'center', 
+                                    textAlign: 'center',
+                                    fontSize: 20,
+                                    fontWeight: 'bold',
+                                }} animation={this.state.animation ? "fadeIn" : ""} duration={1000}>
+                                    {data.deaths}
+                                </Animatable.Text>
                             </Card>
                     </Animatable.View>
                     </View>
