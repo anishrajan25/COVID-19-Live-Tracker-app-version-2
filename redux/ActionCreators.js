@@ -88,7 +88,7 @@ export const fetchDistrictData = () => (dispatch) => {
 
     dispatch(districtLoading());
 
-    return fetch('https://api.covid19india.org/state_district_wise.json')
+    return fetch('https://api.covid19india.org/v4/data.json')
     .then(response => {
         if (response.ok) {
           return response;

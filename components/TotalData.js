@@ -103,7 +103,7 @@ class TotalData extends Component {
 
                 </View>
                 <View style={styles.container}>
-                    <Image style={styles.map} source={ require('./images/covidMap.png')} />
+                    <Image style={styles.map} source={ require('../covidMap.png')} />
                 </View>
 
                 <View style={styles.button, {flex: 2, flexDirection: 'row', marginBottom: 5}}>

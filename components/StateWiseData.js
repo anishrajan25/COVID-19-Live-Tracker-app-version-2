@@ -13,9 +13,7 @@ const mapStateToProps = state => {
 }
 
 
-////////////////////////////////////
 
-/*
 class RenderDistrictCases extends Component {
     constructor(props) {
         super(props);
@@ -34,13 +32,19 @@ class RenderDistrictCases extends Component {
 
     render() {
         
-    const data=this.props.data;
+    const data=this.props.distData;
+    
     //var animate=this.props.animation;
-    //console.log(data);
+    //console.log("showind dist : ",data);
     
     if(data != null) {
         //confirmed = parseInt(cases.confirmed);
         //console.log(confirmed)
+        var confirmed = data.total.confirmed ? data.total.confirmed : 0;
+        var deceased = data.total.deceased ? data.total.deceased : 0;
+        var recovered = data.total.recovered ? data.total.recovered : 0;
+        var tested = data.total.tested ? data.total.tested : 0;
+        var active = confirmed - deceased - recovered;
         return(
             <View style={{paddingBottom: 30, flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
             
@@ -65,7 +69,7 @@ class RenderDistrictCases extends Component {
                                 fontSize: 20,
                                 fontWeight: 'bold',
                             }} animation={this.state.animation ? "fadeIn" : ""} duration={1000} >
-                                {data.confirmed}
+                                {confirmed}
                         </Animatable.Text>
                     </Card>
                     <Card style={ styles.card }>
@@ -88,7 +92,7 @@ class RenderDistrictCases extends Component {
                                 fontSize: 20,
                                 fontWeight: 'bold',
                             }} animation={this.state.animation ? "fadeIn" : ""} duration={1000} >
-                                {data.active}
+                                {active}
                             </Animatable.Text>
                     </Card>
                     
@@ -114,7 +118,7 @@ class RenderDistrictCases extends Component {
                                 fontSize: 20,
                                 fontWeight: 'bold',
                             }} animation={this.state.animation ? "fadeIn" : ""} duration={1000}>
-                        {data.recovered}
+                        {recovered}
                     </Animatable.Text>
                 </Card>
                 <Card style={ styles.card }>
@@ -137,7 +141,7 @@ class RenderDistrictCases extends Component {
                                 fontSize: 20,
                                 fontWeight: 'bold',
                             }} animation={this.state.animation ? "fadeIn" : ""} duration={1000}>
-                                {data.deaths}
+                                {deceased}
                             </Animatable.Text>
                     </Card>
             </Animatable.View>
@@ -152,8 +156,6 @@ class RenderDistrictCases extends Component {
     }
 }
 }
-*/
-///////////////////////////////////////////
 
 
 
@@ -173,7 +175,9 @@ class RenderStateCases extends Component {
     componentWillReceiveProps(){
         this.setState({
             animation:true,
+            
         });
+    
     }
 
     render() {
@@ -184,8 +188,32 @@ class RenderStateCases extends Component {
     
     if(data != null) {
         
-        const st = this.props.data.state;
-        console.log(st);
+        var st ='';
+        if(this.props.areaId === "IN-LK")
+            st='LA';
+        else if(this.props.areaId === 'IN-DD' )
+            st = 'DN';
+        else if(this.props.areaId === 'IN-LD' )
+            st = '';
+        else
+            st = this.props.areaId.slice(3);
+        
+        //console.log("st val: ", st);
+        const districts = [];
+        //console.log("data arr: ", JSON.stringify(this.props.districts.districtData[st]));
+        if(st!== '') {
+            for( dist in (this.props.districts.districtData[st].districts)) {
+                if(dist !== 'Unknown' ){
+                    districts.push(dist);
+                }
+            }
+        }
+        
+        const updatedDistrict = this.state.district;
+        //console.log(districts);
+        //console.log(" showing dist data" ,this.props.districts.districtData[st].districts[this.state.district]);
+        //console.log(st, " " , updatedDistrict);
+        //console.log("outer log", JSON.stringify(this.props.districts.districtData[st].districtData[updatedDistrict]));
         //confirmed = parseInt(cases.confirmed);
         //console.log(confirmed)
         return(
@@ -291,11 +319,32 @@ class RenderStateCases extends Component {
             </Animatable.View>
             </View>
             <View style={{flex: 1}}>
-                            <Text>
-                                {JSON.stringify(this.props.districts.districtData[st])}
-                            </Text>
-                        </View>
+                        
+            <Text style={styles.covid}>{this.state.district ? this.state.district : 'Select District'}</Text>
+            <Picker
+                    style={styles.formItem}
+                    selectedValue={this.state.district}
+                    onValueChange={(itemValue, itemIndex) => {this.setState({district: itemValue})}}>
+                    <Picker.Item label={'Select District'} value={''}/>
+                    {
+                        districts.map((dist) => {
+                            return(
+                                <Picker.Item label={dist} value={dist} />
+                            );
+                        })
+                    }
+                </Picker>
+                <View>
+                
+                    <RenderDistrictCases distData={st ? this.props.districts.districtData[st].districts[this.state.district] : null} />
+
+                </View>
+
+                   
+</View>
+
             </ScrollView>
+
         );
     }
     else{
@@ -307,10 +356,14 @@ class RenderStateCases extends Component {
 
 
 /*
-            <Text style={styles.covid}>{this.state.district ? this.state.district : 'Select District'}</Text>
+
+
+
+
+                 <Text style={styles.covid}>{st ? st : 'Select District'}</Text>
                 <Picker
                     style={styles.formItem}
-                    selectedValue={this.state.district}
+                    selectedValue={st}
                     onValueChange={(itemValue, itemIndex) => {this.setState({district: itemValue ? this.props.districtData.filter((district) => itemValue === district)[0] : '', areaId: itemValue }) }}>
                     <Picker.Item label={'Select District'} value={''}/>
                     {
@@ -321,11 +374,7 @@ class RenderStateCases extends Component {
                         })
                     }
                 </Picker>
-                <View>
                 
-                    <RenderStateCases data={this.state.area} />
-
-                </View>
 */
 
 
@@ -379,7 +428,7 @@ class StateWiseData extends Component {
                 </Picker>
                 <View>
                 
-                    <RenderStateCases districts={this.props.districtData} data={this.state.area} />
+                    <RenderStateCases areaId={this.state.areaId} districts={this.props.districtData} data={this.state.area} />
 
                 </View>
             </ScrollView>

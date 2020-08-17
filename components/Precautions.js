@@ -24,7 +24,7 @@ class Precautions extends Component {
                     <Card style={ styles.card }>
                         <View style={{flex: 1, flexDirection: 'column'}}>
                             <View style={{ flex: 2 }}>
-                                <Image source={ require('./images/distancing.png')} style={ styles.icon } />
+                                <Image source={{ uri:'https://cdn1.iconfinder.com/data/icons/new-normal-after-virus-disease-crisis-3/64/desocializing_social_distance_distancing-512.png'}} style={ styles.icon } />
                             </View>
                             <View style={{flex: 5}}>
                                 <Text style={{ fontWeight: 'bold' , textAlign: "center", fontSize: 17, marginBottom: 3}}>Maintain Social Distancing</Text>
