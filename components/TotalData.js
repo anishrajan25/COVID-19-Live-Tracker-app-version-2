@@ -7,7 +7,7 @@ import * as Animatable from 'react-native-animatable';
 
 const mapStateToProps = state => {
     return {
-      totalIndia: state.totalData,
+      totalIndia: state.totalData
     }
 }
 
@@ -108,7 +108,7 @@ class TotalData extends Component {
 
                 <View style={styles.button, {flex: 2, flexDirection: 'row', marginBottom: 5}}>
                     <Card 
-                        containerStyle={{ justifyContent: 'center', backgroundColor: '#3EB6FC', borderRadius: 50, flex:1 }}
+                        containerStyle={{ justifyContent: 'center', backgroundColor: '#3EB6FC', borderRadius: 20, flex:1 }}
                         >
                         <Icon name='info' 
                             type='font-awesome' 
@@ -119,7 +119,7 @@ class TotalData extends Component {
                         <Text onPress={() => navigate('About')} style={{padding: 5, color: '#535050', fontWeight: 'bold', textAlign: 'center', fontSize: 17 }}>About COVID-19</Text>
                     </Card>
                     <Card 
-                        containerStyle={{ justifyContent: 'center', backgroundColor: '#FF9B30', borderRadius: 50, flex: 1 }}
+                        containerStyle={{ justifyContent: 'center', backgroundColor: '#FF9B30', borderRadius: 20, flex: 1 }}
                         >
                         <Icon name='home' 
                             type='font-awesome' 
@@ -132,7 +132,7 @@ class TotalData extends Component {
                 </View>
                 <View style={styles.button, {flex: 2, flexDirection: 'row', marginBottom: 20}}>
                     <Card 
-                        containerStyle={{ justifyContent: 'center', backgroundColor: '#F3DB55', borderRadius: 50 , flex: 1 }}
+                        containerStyle={{ justifyContent: 'center', backgroundColor: '#F3DB55', borderRadius: 20 , flex: 1 }}
                         >
                         <Icon name='warning' 
                             type='font-awesome' 
@@ -143,7 +143,7 @@ class TotalData extends Component {
                         <Text onPress={() => navigate('Symptoms')} style={{padding: 5, color: '#535050', fontWeight: 'bold', textAlign: 'center', fontSize: 17 }}>Symptoms</Text>
                     </Card>
                     <Card 
-                        containerStyle={{ justifyContent: 'center', backgroundColor: '#42D291', borderRadius: 50, flex: 1  }}
+                        containerStyle={{ justifyContent: 'center', backgroundColor: '#42D291', borderRadius: 20, flex: 1  }}
                         >
                         <Icon name='shield' 
                             type='font-awesome' 
@@ -154,7 +154,6 @@ class TotalData extends Component {
                         <Text onPress={() => navigate('Precautions')} style={{padding: 5, color: '#535050', fontWeight: 'bold', textAlign: 'center', fontSize: 17 }}>Precautions</Text>
                     </Card>
                 </View>
-                
             </ScrollView>
         );
     }

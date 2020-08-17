@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import {Loading} from "./LoadingComponent";
 import { connect } from 'react-redux';
-import { StyleSheet, ScrollView, Text, View,Picker} from "react-native";
+import { StyleSheet, Image, ScrollView, Text, View,Picker} from "react-native";
 import * as Animatable from 'react-native-animatable';
+import {Card} from 'react-native-shadow-cards';
 
 const mapStateToProps = state => {
     return {
@@ -11,55 +12,138 @@ const mapStateToProps = state => {
     }
 }
 
-const RenderCases = ({data}) => {
 
-    console.log(data);
+////////////////////////////////////
+
+/*
+class RenderDistrictCases extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            animation: false,
+            first: "slideInUp"
+        }
+    }
+
+    componentWillReceiveProps(){
+        this.setState({
+            animation:true,
+        });
+    }
+
+    render() {
+        
+    const data=this.props.data;
+    //var animate=this.props.animation;
+    //console.log(data);
     
     if(data != null) {
         //confirmed = parseInt(cases.confirmed);
         //console.log(confirmed)
         return(
-            <View>
-                <Animatable.View animation="fadeInDown" duration={2000}>
-                    <View style={{flex: 2, flexDirection: 'row', justifyContent: 'center'}} >
-                        <View style={{flex: 1, justifyContent: "center", borderRadius: 20, backgroundColor: '#EA3636', margin: 5, padding: 8}}>
-                            <Text style={styles.statHeading}>
+            <View style={{paddingBottom: 30, flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
+            
+            <Animatable.View animation={this.state.animation ? this.state.first : ""} onAnimationEnd={() => this.setState({animation: false, first: ""})} style={{flex: 1, flexDirection: 'column'}} duration={1500} >
+                    <Card style={ styles.card }>
+                        <Animatable.Text style={{
+        
+                                color: '#FF073A',
+                                justifyContent: 'center',
+                                textAlign: 'center',
+                                fontSize: 25,
+                                fontWeight: 'bold',
+                            }} animation={this.state.animation ? "fadeIn" : ""} duration={1000} onAnimationEnd={() => this.setState({animation: false})}>
                                 Confirmed
-                            </Text>
-                            <Text style={styles.count}>
+                        </Animatable.Text>
+                        <Animatable.Text style={{
+                                margin: 5,
+                                fontFamily: 'serif',
+                                color: '#FF073A',
+                                justifyContent: 'center', 
+                                textAlign: 'center',
+                                fontSize: 20,
+                                fontWeight: 'bold',
+                            }} animation={this.state.animation ? "fadeIn" : ""} duration={1000} >
                                 {data.confirmed}
-                            </Text>
-                        </View>
-                        <View style={{flex: 1, justifyContent: "center", borderRadius: 20, backgroundColor: '#1F498E', margin: 5, padding: 8}}>
-                            <Text style={styles.statHeading}>
+                        </Animatable.Text>
+                    </Card>
+                    <Card style={ styles.card }>
+                            <Animatable.Text style={{
+        
+                                    color: '#007BFF',
+                                    justifyContent: 'center',
+                                    textAlign: 'center',
+                                    fontSize: 25,
+                                    fontWeight: 'bold',
+                                }} animation={this.state.animation ? "fadeIn" : ""} duration={1000} >
                                 Active
-                            </Text>
-                            <Text style={styles.count}>
+                            </Animatable.Text>
+                            <Animatable.Text style={{
+                                margin: 5,
+                                color: '#007BFF',
+                                fontFamily: 'serif',
+                                justifyContent: 'center', 
+                                textAlign: 'center',
+                                fontSize: 20,
+                                fontWeight: 'bold',
+                            }} animation={this.state.animation ? "fadeIn" : ""} duration={1000} >
                                 {data.active}
-                            </Text>
-                        </View>
-                    </View>
-                </Animatable.View>
-                <Animatable.View animation="fadeInUp" duration={2000}>
-                    <View style={{flex: 2, flexDirection: 'row', justifyContent: 'center'}}>
-                        <View style={{flex: 1, justifyContent: "center", borderRadius: 20, backgroundColor: '#33962C', margin: 5, padding: 8}}>
-                            <Text style={styles.statHeading}>
-                                Recovered
-                            </Text>
-                            <Text style={styles.count}>
-                                {data.recovered}
-                            </Text>
-                        </View>
-                        <View style={{flex: 1, justifyContent: "center", borderRadius: 20, backgroundColor: '#6C757D', margin: 5, padding: 8}}>
-                            <Text style={styles.statHeading}>
-                                Deaths
-                            </Text>
-                            <Text style={styles.count}>
+                            </Animatable.Text>
+                    </Card>
+                    
+            </Animatable.View>
+            <Animatable.View animation={this.state.animation ? this.state.first : ""} style={{flex: 1, flexDirection: 'column'}} duration={1500} >
+                <Card style={ styles.card }>
+                    <Animatable.Text style={{
+
+                        color: '#28A745',
+                        justifyContent: 'center',
+                        textAlign: 'center',
+                        fontSize: 25,
+                        fontWeight: 'bold',
+                    }} animation={this.state.animation ? "fadeIn" : ""} duration={1000}>
+                        Recovered
+                    </Animatable.Text>
+                    <Animatable.Text style={{
+                                margin: 5,
+                                fontFamily: 'serif',
+                                color: '#28A745',
+                                justifyContent: 'center', 
+                                textAlign: 'center',
+                                fontSize: 20,
+                                fontWeight: 'bold',
+                            }} animation={this.state.animation ? "fadeIn" : ""} duration={1000}>
+                        {data.recovered}
+                    </Animatable.Text>
+                </Card>
+                <Card style={ styles.card }>
+                             <Animatable.Text style={{
+        
+                                    color: '#6C757D',
+                                    justifyContent: 'center',
+                                    textAlign: 'center',
+                                    fontSize: 25,
+                                    fontWeight: 'bold',
+                                }} animation={this.state.animation ? "fadeIn" : ""} duration={1000}>
+                                Deceased
+                            </Animatable.Text>
+                            <Animatable.Text style={{
+                                margin: 5,
+                                fontFamily: 'serif',
+                                color: '#6C757D',
+                                justifyContent: 'center', 
+                                textAlign: 'center',
+                                fontSize: 20,
+                                fontWeight: 'bold',
+                            }} animation={this.state.animation ? "fadeIn" : ""} duration={1000}>
                                 {data.deaths}
-                            </Text>
-                        </View>
-                    </View>
-                </Animatable.View>
+                            </Animatable.Text>
+                    </Card>
+            </Animatable.View>
+
+            
+
             </View>
         );
     }
@@ -67,6 +151,183 @@ const RenderCases = ({data}) => {
         return(<View></View>)
     }
 }
+}
+*/
+///////////////////////////////////////////
+
+
+
+class RenderStateCases extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            animation: false,
+            first: "slideInUp",
+            districtId: '',
+            district: null,
+            animate: false
+        }
+    }
+
+    componentWillReceiveProps(){
+        this.setState({
+            animation:true,
+        });
+    }
+
+    render() {
+        
+    const data=this.props.data;
+    //var animate=this.props.animation;
+    //console.log(data);
+    
+    if(data != null) {
+        
+        const st = this.props.data.state;
+        console.log(st);
+        //confirmed = parseInt(cases.confirmed);
+        //console.log(confirmed)
+        return(
+            <ScrollView>
+            <View style={{paddingBottom: 30, flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
+            
+            <Animatable.View animation={this.state.animation ? this.state.first : ""} onAnimationEnd={() => this.setState({animation: false, first: ""})} style={{flex: 1, flexDirection: 'column'}} duration={1500} >
+                    <Card style={ styles.card }>
+                        <Animatable.Text style={{
+        
+                                color: '#FF073A',
+                                justifyContent: 'center',
+                                textAlign: 'center',
+                                fontSize: 25,
+                                fontWeight: 'bold',
+                            }} animation={this.state.animation ? "fadeIn" : ""} duration={1000} onAnimationEnd={() => this.setState({animation: false})}>
+                                Confirmed
+                        </Animatable.Text>
+                        <Animatable.Text style={{
+                                margin: 5,
+                                fontFamily: 'serif',
+                                color: '#FF073A',
+                                justifyContent: 'center', 
+                                textAlign: 'center',
+                                fontSize: 20,
+                                fontWeight: 'bold',
+                            }} animation={this.state.animation ? "fadeIn" : ""} duration={1000} >
+                                {data.confirmed}
+                        </Animatable.Text>
+                    </Card>
+                    <Card style={ styles.card }>
+                            <Animatable.Text style={{
+        
+                                    color: '#007BFF',
+                                    justifyContent: 'center',
+                                    textAlign: 'center',
+                                    fontSize: 25,
+                                    fontWeight: 'bold',
+                                }} animation={this.state.animation ? "fadeIn" : ""} duration={1000} >
+                                Active
+                            </Animatable.Text>
+                            <Animatable.Text style={{
+                                margin: 5,
+                                color: '#007BFF',
+                                fontFamily: 'serif',
+                                justifyContent: 'center', 
+                                textAlign: 'center',
+                                fontSize: 20,
+                                fontWeight: 'bold',
+                            }} animation={this.state.animation ? "fadeIn" : ""} duration={1000} >
+                                {data.active}
+                            </Animatable.Text>
+                    </Card>
+                    
+            </Animatable.View>
+            <Animatable.View animation={this.state.animation ? this.state.first : ""} style={{flex: 1, flexDirection: 'column'}} duration={1500} >
+                <Card style={ styles.card }>
+                    <Animatable.Text style={{
+
+                        color: '#28A745',
+                        justifyContent: 'center',
+                        textAlign: 'center',
+                        fontSize: 25,
+                        fontWeight: 'bold',
+                    }} animation={this.state.animation ? "fadeIn" : ""} duration={1000}>
+                        Recovered
+                    </Animatable.Text>
+                    <Animatable.Text style={{
+                                margin: 5,
+                                fontFamily: 'serif',
+                                color: '#28A745',
+                                justifyContent: 'center', 
+                                textAlign: 'center',
+                                fontSize: 20,
+                                fontWeight: 'bold',
+                            }} animation={this.state.animation ? "fadeIn" : ""} duration={1000}>
+                        {data.recovered}
+                    </Animatable.Text>
+                </Card>
+                <Card style={ styles.card }>
+                             <Animatable.Text style={{
+        
+                                    color: '#6C757D',
+                                    justifyContent: 'center',
+                                    textAlign: 'center',
+                                    fontSize: 25,
+                                    fontWeight: 'bold',
+                                }} animation={this.state.animation ? "fadeIn" : ""} duration={1000}>
+                                Deceased
+                            </Animatable.Text>
+                            <Animatable.Text style={{
+                                margin: 5,
+                                fontFamily: 'serif',
+                                color: '#6C757D',
+                                justifyContent: 'center', 
+                                textAlign: 'center',
+                                fontSize: 20,
+                                fontWeight: 'bold',
+                            }} animation={this.state.animation ? "fadeIn" : ""} duration={1000}>
+                                {data.deaths}
+                            </Animatable.Text>
+                    </Card>
+            </Animatable.View>
+            </View>
+            <View style={{flex: 1}}>
+                            <Text>
+                                {JSON.stringify(this.props.districts.districtData[st])}
+                            </Text>
+                        </View>
+            </ScrollView>
+        );
+    }
+    else{
+        return(<View></View>)
+    }
+}
+}
+
+
+
+/*
+            <Text style={styles.covid}>{this.state.district ? this.state.district : 'Select District'}</Text>
+                <Picker
+                    style={styles.formItem}
+                    selectedValue={this.state.district}
+                    onValueChange={(itemValue, itemIndex) => {this.setState({district: itemValue ? this.props.districtData.filter((district) => itemValue === district)[0] : '', areaId: itemValue }) }}>
+                    <Picker.Item label={'Select District'} value={''}/>
+                    {
+                        this.props.stateData.stateData.map((area) => {
+                            return(
+                                <Picker.Item label={area.state} value={area.id} />
+                            );
+                        })
+                    }
+                </Picker>
+                <View>
+                
+                    <RenderStateCases data={this.state.area} />
+
+                </View>
+*/
+
 
 
 class StateWiseData extends Component {
@@ -76,8 +337,8 @@ class StateWiseData extends Component {
 
         this.state = {
             areaId: '',
-            area: '',
-            isUT: false
+            area: null,
+            animate: false
         };
     }
 
@@ -101,12 +362,12 @@ class StateWiseData extends Component {
         else if(this.props.stateData.stateData)
         return(
             
-            <ScrollView>
-                <Text style={styles.covid}>Select State/U.T.</Text>
+            <ScrollView style={{backgroundColor: 'white'}}>
+                <Text style={styles.covid}>{this.state.area ? this.state.area.state : 'Select State/ U.T.'}</Text>
                 <Picker
                     style={styles.formItem}
                     selectedValue={this.state.areaId}
-                    onValueChange={(itemValue, itemIndex) => {this.setState({area: itemValue ? this.props.stateData.stateData.filter((area) => itemValue === area.id)[0].state : '', areaId: itemValue }) }}>
+                    onValueChange={(itemValue, itemIndex) => {this.setState({area: itemValue ? this.props.stateData.stateData.filter((area) => itemValue === area.id)[0] : '', areaId: itemValue }) }}>
                     <Picker.Item label={'Select State / U.T.'} value={''}/>
                     {
                         this.props.stateData.stateData.map((area) => {
@@ -118,7 +379,7 @@ class StateWiseData extends Component {
                 </Picker>
                 <View>
                 
-                    <RenderCases data={this.props.stateData.stateData.filter((area) => area.id === this.state.areaId)[0]} />
+                    <RenderStateCases districts={this.props.districtData} data={this.state.area} />
 
                 </View>
             </ScrollView>
@@ -218,17 +479,18 @@ const styles = StyleSheet.create({
       formItem: {
           marginLeft: 50,
           marginRight: 50,
-          marginBottom: 40,
           flex: 1.7,
-      }
+          //color: 'white'
+      },
+      card: {
+        padding: 10, 
+        justifyContent: 'center',
+        margin: 10, 
+        elevation: 20,
+        width: '90%'
+        //backgroundColor: 'black',
+        //flex: 1
+    }
   });
 
 export default connect(mapStateToProps)(StateWiseData);
-
-/*{
-                        this.props.stateData.stateData.map((area) => {
-                            return(
-                                <Picker.Item label={area.state} value={area.id} />
-                            );
-                        })
-                    }*/
