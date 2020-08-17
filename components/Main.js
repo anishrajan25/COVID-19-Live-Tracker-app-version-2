@@ -6,7 +6,7 @@ import AboutCovid from './AboutCovid';
 import Symptoms from "./Symptoms";
 import { connect } from 'react-redux';
 import { View} from "react-native";
-import { fetchTotalData, fetchStateData, fetchDistrictData } from "../redux/ActionCreators";
+import { fetchTotalData, fetchStateData, fetchDistrictData, fetchPrecautions } from "../redux/ActionCreators";
 import { createStackNavigator } from "react-navigation";
 
 const Navigator = createStackNavigator({
@@ -58,7 +58,8 @@ const Navigator = createStackNavigator({
 const mapDispatchToProps = dispatch => ({
     fetchTotalData: () => dispatch(fetchTotalData()),
     fetchStateData: () => dispatch(fetchStateData()),
-    fetchDistrictData: () => dispatch(fetchDistrictData())
+    fetchDistrictData: () => dispatch(fetchDistrictData()),
+    fetchPrecautions: () => dispatch(fetchPrecautions())
 })
 
 class Main extends Component {
@@ -68,6 +69,7 @@ class Main extends Component {
         this.props.fetchTotalData();
         this.props.fetchStateData();
         this.props.fetchDistrictData();
+        this.props.fetchPrecautions();
     }
 
     render() {

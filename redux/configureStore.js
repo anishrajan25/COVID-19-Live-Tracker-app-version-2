@@ -4,6 +4,7 @@ import logger from 'redux-logger';
 import { totalData } from './indiaTotal';
 import { stateData } from "./stateData";
 import { districtData } from "./districtData";
+import { precautions } from "./precautions";
 import { persistStore, persistCombineReducers } from 'redux-persist';
 
 export const ConfigureStore = () => {
@@ -11,7 +12,8 @@ export const ConfigureStore = () => {
         combineReducers({
             totalData,
             stateData,
-            districtData
+            districtData,
+            precautions
         }),
         applyMiddleware(thunk, logger)
     );

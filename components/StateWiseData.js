@@ -175,7 +175,7 @@ class RenderStateCases extends Component {
     componentWillReceiveProps(){
         this.setState({
             animation:true,
-            
+            district: ''
         });
     
     }

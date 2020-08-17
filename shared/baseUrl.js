@@ -1,1 +1,1 @@
-export const baseUrl = 'https://api.covidindiatracker.com'
+export const baseUrl = 'http://my-json-server.typicode.com/anishrajan25/covid-19-app-json-server/';

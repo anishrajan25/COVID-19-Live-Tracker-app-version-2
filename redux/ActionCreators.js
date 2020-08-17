@@ -1,5 +1,6 @@
 import * as ActionTypes from './ActionTypes';
 import { baseUrl } from '../shared/baseUrl';
+import { precautions } from './precautions';
 
 // TOTAL DATA FOR INDIA
 export const fetchTotalData = () => (dispatch) => {
@@ -119,4 +120,43 @@ export const districtFailed = (errmess) => ({
 export const addDistrict = (districtData) => ({
     type: ActionTypes.ADD_DISTRICT,
     payload: districtData
+});
+
+
+// PRECAUTIONS
+export const fetchPrecautions = () => (dispatch) => {
+
+    dispatch(precautionsLoading());
+
+    return fetch(baseUrl + 'precautions')
+    .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error('Error ' + response.status + ': ' + response.statusText);
+          error.response = response;
+          throw error;
+        }
+      },
+      error => {
+            var errmess = new Error(error.message);
+            throw errmess;
+      })
+    .then(response => response.json())
+    .then(precautions => dispatch(addPrecautions(precautions)))
+    .catch(error => dispatch(precautionsFailed(error.message)));
+};
+
+export const precautionsLoading = () => ({
+    type: ActionTypes.PRECAUTIONS_LOADING
+});
+
+export const precautionsFailed = (errmess) => ({
+    type: ActionTypes.PRECAUTIONS_FAILED,
+    payload: errmess
+});
+
+export const addPrecautions = (precautions) => ({
+    type: ActionTypes.ADD_PRECAUTIONS,
+    payload: precautions
 });
