@@ -6,6 +6,7 @@ import {Card} from 'react-native-shadow-cards';
 import { Icon } from "react-native-elements";
 import Loading from "./LoadingComponent";
 
+
 const mapStateToProps = state => {
     return {
       precautions: state.precautions

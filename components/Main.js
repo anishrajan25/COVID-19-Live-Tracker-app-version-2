@@ -5,9 +5,9 @@ import TotalData from "./TotalData";
 import AboutCovid from './AboutCovid';
 import Symptoms from "./Symptoms";
 import { connect } from 'react-redux';
-import { View} from "react-native";
+import { View, StyleSheet, ScrollView, Image, Text, Platform } from "react-native";
 import { fetchTotalData, fetchStateData, fetchDistrictData, fetchPrecautions, fetchSymptoms, fetchAbout, fetchMap } from "../redux/ActionCreators";
-import { createStackNavigator, createDrawerNavigator } from "react-navigation";
+import { createStackNavigator, DrawerItems, SafeAreaView , createDrawerNavigator } from "react-navigation";
 import { Icon } from "react-native-elements";
 
 const Navigator = createStackNavigator({
@@ -18,7 +18,7 @@ const Navigator = createStackNavigator({
         title: 'COVID-19 Tracker | India',
         headerStyle: {
             backgroundColor: "#EC4545",
-           // marginTop: Platform.OS === 'ios' ? 0 : Expo.Constants.statusBarHeight ,
+            paddingLeft: 10,
         },
         headerTintColor: '#fff',
         headerTitleStyle: {
@@ -38,7 +38,8 @@ const AboutNavigator = createStackNavigator({
       navigationOptions: ({ navigation }) => ({
           title: 'About COVID-19',
           headerStyle: {
-              backgroundColor: "#EC4545"
+              backgroundColor: "#EC4545",
+              paddingLeft: 10,
           },
           headerTintColor: '#fff', // for icons
           headerTitleStyle: {
@@ -46,7 +47,6 @@ const AboutNavigator = createStackNavigator({
           },
           headerLeft: <Icon name='menu' size={24}
             color='white'
-            style={{paddingLeft: 5}}
             onPress={() => navigation.toggleDrawer()} 
           />
       })
@@ -59,7 +59,8 @@ const AboutNavigator = createStackNavigator({
       navigationOptions: ({ navigation }) => ({
           title: 'Statewise Analysis',
           headerStyle: {
-              backgroundColor: "#EC4545"
+              backgroundColor: "#EC4545",
+              paddingLeft: 10,
           },
           headerTintColor: '#fff', // for icons
           headerTitleStyle: {
@@ -67,7 +68,6 @@ const AboutNavigator = createStackNavigator({
           },
           headerLeft: <Icon name='menu' size={24}
             color='white'
-            style={{paddingLeft: 5}}
             onPress={() => navigation.toggleDrawer()} 
           />
       })
@@ -80,7 +80,8 @@ const AboutNavigator = createStackNavigator({
       navigationOptions: ({ navigation }) => ({
           title: 'Symptoms',
           headerStyle: {
-              backgroundColor: "#EC4545"
+              backgroundColor: "#EC4545",
+              paddingLeft: 10,
           },
           headerTintColor: '#fff', // for icons
           headerTitleStyle: {
@@ -88,7 +89,6 @@ const AboutNavigator = createStackNavigator({
           },
           headerLeft: <Icon name='menu' size={24}
             color='white'
-            style={{paddingLeft: 5}}
             onPress={() => navigation.toggleDrawer()} 
           />
       })
@@ -101,7 +101,8 @@ const AboutNavigator = createStackNavigator({
       navigationOptions: ({ navigation }) => ({
           title: 'Precautions',
           headerStyle: {
-              backgroundColor: "#EC4545"
+              backgroundColor: "#EC4545",
+              paddingLeft: 10
           },
           headerTintColor: '#fff', // for icons
           headerTitleStyle: {
@@ -109,11 +110,33 @@ const AboutNavigator = createStackNavigator({
           },
           headerLeft: <Icon name='menu' size={24}
             color='white'
-            style={{paddingLeft: 5}}
             onPress={() => navigation.toggleDrawer()} 
           />
       })
   });
+
+
+const CustomDrawerContentComponent = (props) => (
+    <ScrollView>
+        <SafeAreaView style={{flex: 1}}
+        //force inset top always means this side drawer will be displayed on top
+        //even covering status bar on top
+        forceInset={{top: 'always', horizontal: 'never'}}>
+            <View style={styles.drawerHeader}>
+            <View style={{flex: 1}}>
+                <Image source={require('../socialdistancing.png')}
+                style={styles.drawerImage} />
+            </View>
+            <View style={{flex: 2}} //this will allow it to occupy 2X space as compared to upper view
+            >
+                <Text style={styles.drawerHeaderText}>Let's Fight Corona Together</Text>
+            </View>
+            </View>
+            <DrawerItems {...props} />
+        </SafeAreaView>
+    </ScrollView>
+);  
+
 
 const DrawerNavigator = createDrawerNavigator({
     TotalData: {
@@ -121,12 +144,12 @@ const DrawerNavigator = createDrawerNavigator({
         navigationOptions: {
             title: 'Home',
             drawerLabel: 'Home',
-            drawerIcon: (
+            drawerIcon: ({ tintColor }) => (
                 <Icon
                     name="home"
                     type="fontawesome"
-                    size={24}
-                    color='black' />
+                    size={25}
+                    color={tintColor} />
             )
         }
     },
@@ -135,12 +158,12 @@ const DrawerNavigator = createDrawerNavigator({
         navigationOptions: {
             title: 'About COVID-19',
             drawerLabel: 'About COVID-19',
-            drawerIcon: (
+            drawerIcon: ({ tintColor }) => (
                 <Icon
                     name="info"
                     type="fontawesome"
                     size={24}
-                    color='black' />
+                    color={tintColor} />
             )
         }
     },
@@ -149,12 +172,12 @@ const DrawerNavigator = createDrawerNavigator({
         navigationOptions: {
             title: 'Statewise Analysis',
             drawerLabel: 'Statewise Analysis',
-            drawerIcon: (
+            drawerIcon: ({ tintColor }) => (
                 <Icon
-                    name="city"
+                    name="search"
                     type="fontawesome"
                     size={24}
-                    color='black' />
+                    color={tintColor} />
             )
         }
     },
@@ -163,12 +186,12 @@ const DrawerNavigator = createDrawerNavigator({
         navigationOptions: {
             title: 'Symptoms',
             drawerLabel: 'Symptoms',
-            drawerIcon: (
+            drawerIcon: ({ tintColor }) => (
                 <Icon
                     name="warning"
                     type="fontawesome"
                     size={24}
-                    color='black' />
+                    color={tintColor} />
             )
         }
     },
@@ -176,16 +199,20 @@ const DrawerNavigator = createDrawerNavigator({
         screen:  PrecautionsNavigator,
         navigationOptions: {
             title: 'Precautions',
-            drawerLabel: 'Precaution',
-            drawerIcon: (
+            drawerLabel: 'Precautions',
+            drawerIcon: ({ tintColor }) => (
                 <Icon
-                    name="shield"
+                    name="check-circle"
                     type="fontawesome"
                     size={24}
-                    color='black' />
+                    color={tintColor} />
             )
         }
     }
+},
+{
+    drawerBackgroundColor: '#FFF8F8',
+    contentComponent: CustomDrawerContentComponent,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -219,5 +246,30 @@ class Main extends Component {
         );
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1
+    },
+    drawerHeader: {
+      backgroundColor: '#EC4545',
+      height: 140,
+      alignItems: 'center',
+      justifyContent: 'center',
+      flex: 1,
+      flexDirection: 'row'
+    },
+    drawerHeaderText: {
+      color: 'white',
+      fontSize: 24,
+      fontWeight: 'bold',
+      textAlign: 'center'
+    },
+    drawerImage: {
+      margin: 10,
+      width: 80,
+      height: 60
+    }
+});
 
 export default connect(null, mapDispatchToProps)(Main);

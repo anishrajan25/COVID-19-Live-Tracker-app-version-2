@@ -2,10 +2,8 @@ import React, { Component } from "react";
 import {Loading} from "./LoadingComponent";
 import { connect } from 'react-redux';
 import { StyleSheet, ScrollView, Text, View, Image} from "react-native";
-import { Icon, Button } from "react-native-elements";
 import {Card} from 'react-native-shadow-cards';
 import * as Animatable from 'react-native-animatable';
-import { maps } from "../redux/map";
 
 const mapStateToProps = state => {
     return {
@@ -254,7 +252,7 @@ class TotalData extends Component {
         const {navigate} = this.props.navigation;
 
         return(
-            <ScrollView style={{backgroundColor: '#FFF4F4', padding: 5}}>
+            <ScrollView style={{backgroundColor: '#FFF8F8', padding: 5}}>
                 <Animatable.Text animation='fadeIn' duration={500} delay={500} style={styles.mainHeading}>Cases Overview</Animatable.Text>
                 <RenderCases data={this.props.totalIndia} />
                 <RenderMaps maps={this.props.maps} />
@@ -332,21 +330,8 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         textAlign: 'center',
         letterSpacing: 0.2,
-        color: '#FD7E54'
+        color: '#4B4B4B'
     }
   });
 
 export default connect(mapStateToProps)(TotalData);
-/* <Card style={{marginLeft: 'auto', marginRight: 'auto', marginTop: 20}}>     3EB6FC
-                    <Text style={styles.mapHeading}>Map of confirmed cases</Text>
-                    <Image style={styles.map} source={ require('../899px-India_COVID-19_active_cases_map.svg.png')} />
-                </Card>
-                <Card style={{marginLeft: 'auto', marginRight: 'auto', marginTop: 20}}>
-                    <Text style={styles.mapHeading}>Map of active cases</Text>
-                    <Image style={styles.map} source={ require('../899px-India_COVID-19_confirmed_cases_map.svg.png')} />
-                </Card>
-                <Card style={{marginLeft: 'auto', marginRight: 'auto', marginTop: 20}}>
-                    <Text style={styles.mapHeading}>Map of deaths due to the pandemic</Text>
-                    <Image style={styles.map} source={ require('../899px-India_COVID-19_deaths_map.svg.png')} />
-                </Card>
-                */
