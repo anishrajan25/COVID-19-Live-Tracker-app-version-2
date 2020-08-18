@@ -268,38 +268,12 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       backgroundColor: '#FFF4F4'
     },
-    virus: {
-        height: 250,
-        width: 250,
-        marginTop: 20
-    },
     map: {
         marginLeft: 'auto',
         marginRight: 'auto',
         marginBottom: 20,
         height: 340,
         width: 300
-    },
-    covid: {
-        backgroundColor: '#F36161',
-        margin: 20,
-        fontWeight: 'bold',
-        borderRadius: 20,
-        fontSize: 17,
-        padding: 20,
-        fontFamily: 'serif',
-        color: 'white',
-        letterSpacing: 2,
-        justifyContent: 'center',
-        textAlign: 'center'
-    },
-    button: {
-        borderRadius: 70,
-        flex: 1,
-        marginLeft: 30,
-        marginRight: 30,
-        marginTop: 10
-
     },
     mapHeading: {
         margin: 5,

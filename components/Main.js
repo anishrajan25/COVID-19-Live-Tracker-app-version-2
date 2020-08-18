@@ -124,12 +124,12 @@ const CustomDrawerContentComponent = (props) => (
         forceInset={{top: 'always', horizontal: 'never'}}>
             <View style={styles.drawerHeader}>
             <View style={{flex: 1}}>
-                <Image source={require('../socialdistancing.png')}
+                <Image source={require('../assets/splash.png')}
                 style={styles.drawerImage} />
             </View>
             <View style={{flex: 2}} //this will allow it to occupy 2X space as compared to upper view
             >
-                <Text style={styles.drawerHeaderText}>Let's Fight Corona Together</Text>
+                <Text style={styles.drawerHeaderText}>Let's Fight COVID-19 Together</Text>
             </View>
             </View>
             <DrawerItems {...props} />
@@ -228,7 +228,6 @@ const mapDispatchToProps = dispatch => ({
 class Main extends Component {
 
     componentDidMount() {
-        console.log('calling fetch :');
         this.props.fetchTotalData();
         this.props.fetchMap();
         this.props.fetchStateData();
@@ -247,7 +246,7 @@ class Main extends Component {
         //Code to display alert message when use click on android device back button.
         Alert.alert(
           ' Exit From App ',
-          ' Do you want to exit From App ?',
+          ' Do you want to exit the App ?',
           [
             { text: 'Yes', onPress: () => BackHandler.exitApp() },
             { text: 'No', onPress: () => console.log('NO Pressed') }
@@ -292,8 +291,8 @@ const styles = StyleSheet.create({
     },
     drawerImage: {
       margin: 10,
-      width: 80,
-      height: 60
+      width: 100,
+      height: 125
     }
 });
 

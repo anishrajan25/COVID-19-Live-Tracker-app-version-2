@@ -4,9 +4,7 @@ import { baseUrl } from '../shared/baseUrl';
 // TOTAL DATA FOR INDIA
 export const fetchTotalData = () => (dispatch) => {
 
-    dispatch(totalLoading())
-    //setTimeout(, 2000);
-    console.log('invoked fetch total');
+    dispatch(totalLoading());
 
     return fetch('https://api.covidindiatracker.com/total.json')
     .then( response => {

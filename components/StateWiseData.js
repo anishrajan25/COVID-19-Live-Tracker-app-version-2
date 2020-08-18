@@ -426,11 +426,6 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       backgroundColor: '#FFF4F4'
     },
-    virus: {
-        height: 250,
-        width: 250,
-        marginTop: 20
-    },
     map: {
         margin: 30
     },
@@ -446,55 +441,6 @@ const styles = StyleSheet.create({
         letterSpacing: 2,
         justifyContent: 'center',
         textAlign: 'center'
-    },
-    button: {
-        borderRadius: 70,
-        flex: 1,
-        marginLeft: 30,
-        marginRight: 30,
-        marginTop: 10
-
-    },
-    mapHeading: {
-        marginLeft: 40,
-        marginRight: 40,
-        marginTop: 10,
-        borderRadius: 70,
-        backgroundColor: '#FF733B',
-        fontWeight: 'bold',
-        fontSize: 23,
-        padding: 20,
-        fontFamily: 'serif',
-        color: 'white',
-        letterSpacing: 2,
-        justifyContent: 'center',
-        textAlign: 'center'
-    },
-    statHeading: {
-        
-        color: 'white',
-        textDecorationLine: 'underline',
-        justifyContent: 'center',
-        textAlign: 'center',
-        fontSize: 25,
-        fontWeight: 'bold',
-    },
-    count: {
-        margin: 5,
-        fontFamily: 'serif',
-        color: 'white',
-        justifyContent: 'center', 
-        textAlign: 'center',
-        fontSize: 20,
-        fontWeight: 'bold',
-    },
-    delta: {
-        fontFamily: 'serif',
-        color: 'white',
-        justifyContent: 'center', 
-        textAlign: 'center',
-        fontSize: 15,
-        fontWeight: 'bold',
     },
     formRow: {
         alignItems: 'center',
