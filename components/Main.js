@@ -5,7 +5,7 @@ import TotalData from "./TotalData";
 import AboutCovid from './AboutCovid';
 import Symptoms from "./Symptoms";
 import { connect } from 'react-redux';
-import { View, StyleSheet, ScrollView, Image, Text, Platform } from "react-native";
+import { View, StyleSheet, ScrollView, Image, Text, BackHandler, Alert } from "react-native";
 import { fetchTotalData, fetchStateData, fetchDistrictData, fetchPrecautions, fetchSymptoms, fetchAbout, fetchMap } from "../redux/ActionCreators";
 import { createStackNavigator, DrawerItems, SafeAreaView , createDrawerNavigator } from "react-navigation";
 import { Icon } from "react-native-elements";
@@ -236,6 +236,31 @@ class Main extends Component {
         this.props.fetchPrecautions();
         this.props.fetchSymptoms();
         this.props.fetchAbout();
+    }
+
+    componentWillMount() {
+        BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
+    }
+
+    onBackPress = () => {
+ 
+        //Code to display alert message when use click on android device back button.
+        Alert.alert(
+          ' Exit From App ',
+          ' Do you want to exit From App ?',
+          [
+            { text: 'Yes', onPress: () => BackHandler.exitApp() },
+            { text: 'No', onPress: () => console.log('NO Pressed') }
+          ],
+          { cancelable: false },
+        );
+     
+        // Return true to enable back button over ride.
+        return true;
+    }
+    
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
     }
 
     render() {
