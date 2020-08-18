@@ -16,3 +16,6 @@ export const SYMPTOMS_FAILED = 'SYMPTOMS_FAILED';
 export const ADD_ABOUT = 'ADD_ABOUT';
 export const ABOUT_LOADING = 'ABOUT_LOADING';
 export const ABOUT_FAILED = 'ABOUT_FAILED';
+export const ADD_MAP = 'ADD_MAP';
+export const MAP_LOADING = 'MAP_LOADING';
+export const MAP_FAILED = 'MAP_FAILED';

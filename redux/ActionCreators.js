@@ -237,3 +237,42 @@ export const addAbout = (about) => ({
     type: ActionTypes.ADD_ABOUT,
     payload: about
 });
+
+
+// MAP
+export const fetchMap = () => (dispatch) => {
+
+    dispatch(mapLoading());
+
+    return fetch(baseUrl + 'map')
+    .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error('Error ' + response.status + ': ' + response.statusText);
+          error.response = response;
+          throw error;
+        }
+      },
+      error => {
+            var errmess = new Error(error.message);
+            throw errmess;
+      })
+    .then(response => response.json())
+    .then(map => dispatch(addMap(map)))
+    .catch(error => dispatch(mapFailed(error.message)));
+};
+
+export const mapLoading = () => ({
+    type: ActionTypes.MAP_LOADING
+});
+
+export const mapFailed = (errmess) => ({
+    type: ActionTypes.MAP_FAILED,
+    payload: errmess
+});
+
+export const addMap = (map) => ({
+    type: ActionTypes.ADD_MAP,
+    payload: map
+});

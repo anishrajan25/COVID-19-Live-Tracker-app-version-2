@@ -6,6 +6,7 @@ import { stateData } from "./stateData";
 import { symptoms } from "./symptoms";
 import { districtData } from "./districtData";
 import { about } from "./about";
+import { maps } from "./map";
 import { precautions } from "./precautions";
 import { persistStore, persistCombineReducers } from 'redux-persist';
 
@@ -13,6 +14,7 @@ export const ConfigureStore = () => {
     const store = createStore(
         combineReducers({
             totalData,
+            maps,
             stateData,
             districtData,
             precautions,

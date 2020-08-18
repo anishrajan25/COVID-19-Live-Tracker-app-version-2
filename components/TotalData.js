@@ -5,10 +5,12 @@ import { StyleSheet, ScrollView, Text, View, Image} from "react-native";
 import { Icon, Button } from "react-native-elements";
 import {Card} from 'react-native-shadow-cards';
 import * as Animatable from 'react-native-animatable';
+import { maps } from "../redux/map";
 
 const mapStateToProps = state => {
     return {
-      totalIndia: state.totalData
+      totalIndia: state.totalData,
+      maps: state.maps
     }
 }
 
@@ -39,7 +41,7 @@ const RenderCases = ({data}) => {
         //confirmed = parseInt(cases.confirmed);
         //console.log(confirmed)
         return(
-            <Animatable.View animation='slideInDown' duration={2000}  style={{flex: 1, justifyContent: "center", marginLeft: 20, marginRight: 20}}>
+            <Animatable.View animation='slideInUp' duration={1000}  style={{flex: 1, justifyContent: "center", marginLeft: 20, marginRight: 20}}>
 
                 <Card style={ styles.card }>
                     <Text style={{
@@ -203,6 +205,48 @@ const RenderCases = ({data}) => {
     }
 }
 
+const RenderMaps = ({maps}) => {
+
+    if(maps.isLoading) {
+        return(
+            <ScrollView style={{backgroundColor: '#FFF8F8'}}>
+                <Loading />
+            </ScrollView>
+        );
+    }
+
+    else if (maps.errMess) {
+        return(
+            <ScrollView style={{backgroundColor: '#FFF8F8'}}>
+                <Animatable.View style={styles.container} animation='fadeIn' duration={1000}>
+                    <Card style={styles.card} >
+                        <Text style={styles.errorText} >{maps.errMess}</Text>
+                    </Card>
+                </Animatable.View>
+            </ScrollView>
+        );
+    }
+
+    else if(maps.maps!= null) {
+        return(
+            maps.maps.map((item) => {
+                return(
+                    <Card style={{marginLeft: 'auto', marginRight: 'auto', marginTop: 20, marginBottom: 20, elevation: 10}}>
+                        <Text style={styles.mapHeading}>{item.heading}</Text>
+                        <Image style={styles.map} source={{ uri: item.image }} />
+                    </Card>
+                );
+            })
+        );
+        
+    }
+    else {
+        return(
+            <View><Text>ni ho rha kuch </Text></View>
+        );
+    }
+}
+
 class TotalData extends Component {
 
     render() {
@@ -211,67 +255,9 @@ class TotalData extends Component {
 
         return(
             <ScrollView style={{backgroundColor: '#FFF4F4', padding: 5}}>
-                <Animatable.Text animation='fadeIn' duration={500} delay={1000} style={styles.mainHeading}>Cases Overview</Animatable.Text>
-                <View >
-                
-                    <RenderCases data={this.props.totalIndia} />
-
-                </View>
-
-                <Card style={{marginLeft: 'auto', marginRight: 'auto', marginTop: 20, marginBottom: 20, elevation: 10}}>
-                    <Text style={styles.mapHeading}>Map of confirmed cases per million residents</Text>
-                    <Image style={styles.map} source={ require('../899px-India_COVID-19_cases_density_map.svg.png')} />
-                </Card>
-
-                <View style={styles.button, {flex: 2, flexDirection: 'row', marginBottom: 5}}>
-                
-                    <Card 
-                        style={{ justifyContent: 'center', margin: 10, backgroundColor: '#2474CA', borderRadius: 25, flex:1, padding: 10, elevation: 10 }}
-                        >
-                        <Icon name='info' 
-                            type='font-awesome' 
-                            size={65}
-                            iconStyle={{ color: 'white' }}
-                            onPress={() => navigate('About')}
-                            />
-                        <Text onPress={() => navigate('About')} style={{padding: 5, color: '#ffffff', fontWeight: 'bold', textAlign: 'center', fontSize: 17 }}>About COVID-19</Text>
-                    </Card>
-                    <Card 
-                        style={{ justifyContent: 'center', margin: 10, padding: 10, backgroundColor: '#FF9B30', borderRadius: 25, flex: 1, elevation: 10 }}
-                        >
-                        <Icon name='home' 
-                            type='font-awesome' 
-                            size={68}
-                            iconStyle={{ color: 'white' }}
-                            onPress={() => navigate('StateWiseData')}
-                            />
-                        <Text onPress={() => navigate('StateWiseData')} style={{padding: 5, color: 'white', fontWeight: 'bold', textAlign: 'center', fontSize: 17 }}>Statewise Analysis</Text>
-                    </Card>    
-                </View>
-                <View style={styles.button, {flex: 2, flexDirection: 'row', marginBottom: 20}}>
-                    <Card 
-                        style={{ justifyContent: 'center', margin: 10, padding: 10, backgroundColor: '#CD4040', borderRadius: 25 , flex: 1, elevation: 10 }}
-                        >
-                        <Icon name='warning' 
-                            type='font-awesome' 
-                            size={78}
-                            iconStyle={{ color: '#ffffff' }}
-                            onPress={() => navigate('Symptoms')}
-                            />
-                        <Text onPress={() => navigate('Symptoms')} style={{padding: 5, color: '#ffffff', fontWeight: 'bold', textAlign: 'center', fontSize: 17 }}>Symptoms</Text>
-                    </Card>
-                    <Card 
-                        style={{ justifyContent: 'center',  margin: 10, padding: 10, backgroundColor: '#46CF6F', borderRadius: 25, flex: 1 , elevation: 10 }}
-                        >
-                        <Icon name='shield' 
-                            type='font-awesome' 
-                            size={80}
-                            iconStyle={{ color: '#ffffff' }}
-                            onPress={() => navigate('Precautions')}
-                            />
-                        <Text onPress={() => navigate('Precautions')} style={{padding: 5, color: '#ffffff', fontWeight: 'bold', textAlign: 'center', fontSize: 17 }}>Precautions</Text>
-                    </Card>
-                </View>
+                <Animatable.Text animation='fadeIn' duration={500} delay={500} style={styles.mainHeading}>Cases Overview</Animatable.Text>
+                <RenderCases data={this.props.totalIndia} />
+                <RenderMaps maps={this.props.maps} />
             </ScrollView>
         );
     }

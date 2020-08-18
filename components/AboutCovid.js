@@ -4,6 +4,7 @@ import * as Animatable from 'react-native-animatable';
 import { Icon } from "react-native-elements";
 import { connect } from 'react-redux';
 import {Card} from 'react-native-shadow-cards';
+import Loading from "./LoadingComponent";
 
 const mapStateToProps = state => {
     return {
