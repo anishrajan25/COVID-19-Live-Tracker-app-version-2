@@ -166,7 +166,6 @@ class RenderStateCases extends Component {
         this.state = {
             animation: false,
             first: "slideInUp",
-            districtId: '',
             district: null,
             animate: false
         }
@@ -202,14 +201,14 @@ class RenderStateCases extends Component {
             const districts = [];
             //console.log("data arr: ", JSON.stringify(this.props.districts.districtData[st]));
             if(st!== '') {
-                for( dist in (this.props.districts.districtData[st].districts)) {
+                for( var dist in (this.props.districts.districtData[st].districts)) {
                     if(dist !== 'Unknown' && dist!==data.state ){
                         districts.push(dist);
                     }
                 }
             }
             
-            const updatedDistrict = this.state.district;
+            //const updatedDistrict = this.state.district;
             //console.log(districts);
             //console.log(" showing dist data" ,this.props.districts.districtData[st].districts[this.state.district]);
             //console.log(st, " " , updatedDistrict);
