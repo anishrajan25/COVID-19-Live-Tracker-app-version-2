@@ -325,8 +325,16 @@ class RenderStateCases extends Component {
                             </Card>
                     </Animatable.View>
                     </View>
+
+                    {
+                        () => {
+                            return(<Text>Aise chlega</Text>);
+                        }
+                        
+                            
+                    }
+
                     <Animatable.View animation='fadeIn' duration={1000} delay={500} style={{flex: 1}}>
-                                
                         <Text style={styles.covid}>{this.state.district ? this.state.district : 'Select District'}</Text>
                         <Picker
                             style={styles.formItem}
@@ -345,7 +353,6 @@ class RenderStateCases extends Component {
                             <RenderDistrictCases distData={st ? this.props.districts.districtData[st].districts[this.state.district] : null} />
                         </View>
                     </Animatable.View>
-
                 </ScrollView>
 
             );
@@ -429,15 +436,15 @@ const styles = StyleSheet.create({
         margin: 30
     },
     covid: {
-        backgroundColor: '#F36161',
-        margin: 40,
+        //backgroundColor: '#F36161',
+        margin: 30,
         fontWeight: 'bold',
         borderRadius: 50,
-        fontSize: 17,
-        padding: 20,
+        fontSize: 25,
+        //padding: 20,
         fontFamily: 'serif',
-        color: 'white',
-        letterSpacing: 2,
+        color: '#F36161',
+        //letterSpacing: 1,
         justifyContent: 'center',
         textAlign: 'center'
     },
