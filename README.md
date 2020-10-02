@@ -26,3 +26,7 @@ Apart from showing the latest state and district data, this app gives informatio
 ### GIF 
 
 <img src="https://github.com/anishrajan25/Project-Images/blob/master/COVID-19%20v2/Screen%20recording.gif" width="30%">
+
+#### Made with ♥ by <a href="https://github.com/anishrajan25">anishrajan25</a>
+#### 
+[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://github.com/anishrajan25)
