@@ -22,8 +22,8 @@ body:
         Please describe the problem you are experiencing. What is not working?
         Try to focus on the functional aspect of the issue, rather than technical details.
       placeholder: |
-        While [performing what action]
-        I noticed [the issue/bug]
+        While [description of the action/steps taken]
+        I noticed [description of the issue/bug]
         as a result of that [impact].
     validations:
       required: true
