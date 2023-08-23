@@ -52,7 +52,7 @@ body:
       description: |
         Please copy and paste any relevant log output.
         This will be automatically formatted into code, so no need for backticks.
-        Please indicate from which component of the pipeline the logs originate.
+        Please indicate from which component the logs originate.
       render: shell
   - type: textarea
     id: screenshot
