@@ -6,13 +6,12 @@ body:
   - type: markdown
     attributes:
       value: |
-        Welcome to the Jaeger project! 👋🎉 Thanks for taking the time to fill out this bug report.
+        Welcome to Apache Camel K! 👋🎉 Thanks for taking the time to fill out this bug report.
 
         Before you post:
         - Please search for existing issues to avoid creating duplicate bugs/feature requests.
         - Please be respectful and considerate of others (see [CNCF Code of Conduct](https://github.com/cncf/foundation/blob/main/code-of-conduct.md)).
-        - If you only have a question, you may get a faster response by asking in [our Slack chat room](https://cloud-native.slack.com/archives/CGG7NFUJ3).
-          If you don't have a CNCF Slack account, you may sign up at: https://slack.cncf.io/.
+        - If you only have a question, you may get a faster response by asking in [our Zulip chat room](https://camel.zulipchat.com/login/) or [mailing list](https://camel.apache.org/community/mailing-list/).
 
         Additional information helps us troubleshoot the issue faster.
   - type: textarea
@@ -68,53 +67,23 @@ body:
   - type: markdown
     attributes:
       value: |
-        ## Jaeger setup
-        Please describe your Jaeger setup.
+        ## Camel K setup
+        Please describe your Camel K setup.
   - type: input
     id: version
     attributes:
-      label: Jaeger backend version
-      description: Which version of the Jaeger backend are you running?
-      placeholder: "Ex: v1.36.0"
-  - type: textarea
-    id: sdk
-    attributes:
-      label: SDK
-      description: Which SDK are you using to send data to Jaeger?
-      placeholder: "Ex: Jaeger Go client vX.Y.Z, or OpenTelemetry Java SDK vX.Y.Z"
-  - type: textarea
-    id: pipeline
-    attributes:
-      label: Pipeline
-      description: Please describe your data collection pipeline configuration.
-      placeholder: |
-        Ex: OTEL SDK -> OTEL collector -> Jaeger Collector -> [Jaeger proto] -> Kafka -> Jaeger Ingester -> Elasticsearch
-        Ex: OTEL SDK -> [OTLP] -> Jaeger-all-in-one
-        Ex: Jaeger SDK -> jaeger-agent -> ...
+      label: Camel K version
+      description: Which version of the Camel K are you running?
+      placeholder: "Ex: v1.12.1"
   - type: input
-    id: storage
+    id: language
     attributes:
-      label: Stogage backend
-      description: Which storage backend are you using?
-      placeholder: "Ex: Cassandra vX.Y, Elasticsearch v7.x, AWS Elasticsearch, ..."
+      label: Language
+      description: Which language are you using for writing integrations? [supported languages](https://camel.apache.org/camel-k/next/languages/languages.html)
+      placeholder: "Ex: Java, XML, or YAML"
   - type: input
     id: os
     attributes:
       label: Operating system
-      description: On which OS do you deploy Jaeger?
+      description: On which OS are you running Camel K?
       placeholder: "Ex: Linux, Windows, etc."
-  - type: input
-    id: deployment
-    attributes:
-      label: Deployment model
-      description: How do you deploy Jaeger components?
-      placeholder: "Ex: Docker, Kubernetes, binaries on bare metal, ..."
-  - type: textarea
-    id: deployment_config
-    attributes:
-      label: Deployment configs
-      description: |
-        If applicable, include examples of your deployment configuration.
-        This will be automatically formatted into code, so no need for backticks.
-      render: shell
-      placeholder: "Ex: docker-compose.yml, k8s manifests, command line options, ..."
