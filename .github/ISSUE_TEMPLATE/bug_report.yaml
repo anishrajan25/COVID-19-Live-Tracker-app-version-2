@@ -22,9 +22,9 @@ body:
         Please describe the problem you are experiencing. What is not working?
         Try to focus on the functional aspect of the issue, rather than technical details.
       placeholder: |
-        As a [description of a user persona, e.g. Jaeger operator, Jaeger power user]
-        I want [functionality]
-        so that [benefit].
+        While [performing what action]
+        I noticed [the issue/bug]
+        as a result of that [impact].
     validations:
       required: true
   - type: textarea
