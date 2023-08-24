@@ -54,7 +54,7 @@ body:
         This will be automatically formatted into code, so no need for backticks.
         Please indicate from which component the logs originate.
         - _**How to get camel-k-operator log**: `kubectl logs -f $(k get pod -l app=camel-k -o name)`_
-        - _Do verify the namespace/platform on which your camel-k is installed. The builder pod name could be different for different platforms. E.g. the builder pod name if the camel-k-operator is in OpenShift is `camel-k-kit`._
+        - _**Note:** Verify the namespace/platform where camel-k is installed. The builder pod name can vary by platform (e.g., in OpenShift, it's `camel-k-kit`)._
       render: shell
   - type: textarea
     id: screenshot
