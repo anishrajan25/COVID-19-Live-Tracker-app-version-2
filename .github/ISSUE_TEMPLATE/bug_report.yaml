@@ -53,7 +53,7 @@ body:
         Please copy and paste any relevant log output.
         This will be automatically formatted into code, so no need for backticks.
         Please indicate from which component the logs originate.
-        - **How to get camel-k-operator log**: `kubectl logs -f $(k get pod -l app=camel-k -o name)`_
+        - _**How to get camel-k-operator log**: `kubectl logs -f $(k get pod -l app=camel-k -o name)`_
         - _Do verify the namespace/platform on which your camel-k is installed. The builder pod name could be different for different platforms. E.g. the builder pod name if the camel-k-operator is in OpenShift is `camel-k-kit`._
       render: shell
   - type: textarea
