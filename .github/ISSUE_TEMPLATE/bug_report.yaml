@@ -53,12 +53,15 @@ body:
         Please copy and paste any relevant log output.
         This will be automatically formatted into code, so no need for backticks.
         Please indicate from which component the logs originate.
+        How to get camel-k-operator log: `kubectl logs -f $(k get pod -l app=camel-k -oname)`
       render: shell
   - type: textarea
     id: screenshot
     attributes:
       label: Screenshot
-      description: If applicable, add screenshots to help explain your problem.
+      description: |
+        If applicable, add screenshots for the visusal elements to help explain your problem.
+        In case of any text (code or logs), please share it in text format.
   - type: textarea
     id: additional_context
     attributes:
@@ -73,7 +76,9 @@ body:
     id: version
     attributes:
       label: Camel K version
-      description: Which version of the Camel K are you running?
+      description: |
+        Which version of the Camel K are you running?
+        Verify if the Kamel CLI is the same version as the Camel-K-Operator with `kamel version -a`
       placeholder: "Ex: v1.12.1"
   - type: input
     id: language
